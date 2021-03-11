@@ -1,3 +1,4 @@
+# speedtest for icss edit by @rruuurr 
 """Check your internet speed powered by speedtest.net
 Syntax: .speedtest
 Available Options: image, file, text"""
@@ -8,8 +9,8 @@ import speedtest
 from . import reply_id
 
 
-@bot.on(admin_cmd(pattern="speedtest ?(.*)"))
-@bot.on(sudo_cmd(pattern="speedtest ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="سرعه النت ?(.*)"))
+@bot.on(sudo_cmd(pattern="سرعه النت ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -22,9 +23,7 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    catevent = await edit_or_reply(
-        event, "`Calculating my internet speed. Please wait!`"
-    )
+    catevent = await edit_or_reply(event, "** ▷ يتم قياس سرعه الانترنيت ◃**")
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
@@ -64,7 +63,9 @@ async def _(event):
             await event.client.send_file(
                 event.chat_id,
                 speedtest_image,
-                caption="**SpeedTest** completed in {} seconds".format(ms),
+                caption="𓆩 𝑺𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑺𝑷𝑬𝑬𝑫𝑻𝑬𝑺𝑻  𓆪\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n**⪼ اڪتمل اختبار السرعه في ** {} **ثانيه** 𓆰.".format(
+                    ms
+                ),
                 force_document=as_document,
                 reply_to=reply_msg_id,
                 allow_cache=False,
