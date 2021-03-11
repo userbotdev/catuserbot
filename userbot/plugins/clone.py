@@ -15,7 +15,7 @@ DEFAULTUSER = str(AUTONAME) if AUTONAME else str(ALIVE_NAME)
 DEFAULTUSERBIO = (
     str(DEFAULT_BIO)
     if DEFAULT_BIO
-    else "sıɥʇ ǝpoɔǝp uǝɥʇ llıʇu∩ ˙ ǝɔɐds ǝʇɐʌıɹd ǝɯos ǝɯ ǝʌı⅁˙"
+    else "- ‏وحدي أضيء، وحدي أنطفئ انا قمري و كُل نجومي..🤍"
 )
 if Config.PRIVATE_GROUP_BOT_API_ID is None:
     BOTLOG = False
@@ -24,7 +24,7 @@ else:
     BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 
-@bot.on(admin_cmd(pattern="clone ?(.*)"))
+@bot.on(admin_cmd(pattern="نسخ ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -63,16 +63,16 @@ async def _(event):
     await event.client(functions.photos.UploadProfilePhotoRequest(pfile))
     await event.delete()
     await event.client.send_message(
-        event.chat_id, "**LET US BE AS ONE**", reply_to=reply_message
+        event.chat_id, "** ⪼ تـم نسـخ البـروفايل ༗.**", reply_to=reply_message
     )
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"#CLONED\nSuccesfully cloned [{first_name}](tg://user?id={user_id })",
+            f"#النسخ\n ⪼ تم نسخ ↫ [{first_name}](tg://user?id={user_id }) بنجاح ✅",
         )
 
 
-@bot.on(admin_cmd(pattern="revert$"))
+@bot.on(admin_cmd(pattern="اعاده$"))
 async def _(event):
     if event.fwd_from:
         return
@@ -88,10 +88,11 @@ async def _(event):
     await event.client(functions.account.UpdateProfileRequest(about=bio))
     await event.client(functions.account.UpdateProfileRequest(first_name=name))
     await event.client(functions.account.UpdateProfileRequest(last_name=blank))
-    await event.edit("succesfully reverted to your account back")
+    await event.edit("**⪼ تمت اعاده البـروفايل بنجاح ✅ 𓆰**")
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, f"#REVERT\nSuccesfully reverted back to your profile"
+            BOTLOG_CHATID,
+            f"#الاعاده\n ⪼ الاعادة تعمل بنجاح ✅ تم اعاده البروفايل الى وضعه الاصلي",
         )
 
 
