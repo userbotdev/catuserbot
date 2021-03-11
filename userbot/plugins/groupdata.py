@@ -1,14 +1,20 @@
+# for -<*>~ SOURCE ICSS ~<*>- By: @rruuurr
+
+import asyncio
 import io
+from asyncio import sleep
 from datetime import datetime
 from math import sqrt
 
 from emoji import emojize
-from telethon import functions
 from telethon.errors import (
     ChannelInvalidError,
     ChannelPrivateError,
     ChannelPublicGroupNaError,
+    ChatAdminRequiredError,
+    UserAdminInvalidError,
 )
+from telethon.tl import functions
 from telethon.tl.functions.channels import GetFullChannelRequest, GetParticipantsRequest
 from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest
 from telethon.tl.types import (
@@ -16,54 +22,33 @@ from telethon.tl.types import (
     ChannelParticipantCreator,
     ChannelParticipantsAdmins,
     ChannelParticipantsBots,
+    ChannelParticipantsKicked,
+    ChatBannedRights,
     MessageActionChannelMigrateFrom,
+    UserStatusEmpty,
+    UserStatusLastMonth,
+    UserStatusLastWeek,
+    UserStatusOffline,
+    UserStatusOnline,
+    UserStatusRecently,
 )
 from telethon.utils import get_input_location
 
-from . import BOTLOG, BOTLOG_CHATID, get_user_from_event
+from . import BOTLOG, BOTLOG_CHATID
 
 
-@bot.on(admin_cmd(pattern="adminperm(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="adminperm(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="مغادره$"))
+async def kickme(leave):
+    await leave.edit("⪼ٖ تمت مغادرۿہٰ المجمـوعۿہٰ بنجـاح ༗ .")
+    await leave.client.kick_participant(leave.chat_id, "me")
+
+
+@bot.on(admin_cmd(pattern="المشرفين ?(.*)"))
+@bot.on(sudo_cmd(pattern="المشرفين ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    user, reason = await get_user_from_event(event)
-    if not user:
-        return
-    result = await event.client(
-        functions.channels.GetParticipantRequest(channel=event.chat_id, user_id=user.id)
-    )
-    try:
-        c_info = "✅" if result.participant.admin_rights.change_info else "❌"
-        del_me = "✅" if result.participant.admin_rights.delete_messages else "❌"
-        ban = "✅" if result.participant.admin_rights.ban_users else "❌"
-        invite_u = "✅" if result.participant.admin_rights.invite_users else "❌"
-        pin = "✅" if result.participant.admin_rights.pin_messages else "❌"
-        add_a = "✅" if result.participant.admin_rights.add_admins else "❌"
-        call = "✅" if result.participant.admin_rights.manage_call else "❌"
-    except Exception:
-        return await edit_or_reply(
-            event,
-            f"{_format.mentionuser(user.first_name ,user.id)} `is not admin of this this {event.chat.title} chat`",
-        )
-    output = f"**Admin rights of **{_format.mentionuser(user.first_name ,user.id)} **in {event.chat.title} chat are **\n"
-    output += f"__Change info :__ {c_info}\n"
-    output += f"__Delete messages :__ {del_me}\n"
-    output += f"__Ban users :__ {ban}\n"
-    output += f"__Invite users :__ {invite_u}\n"
-    output += f"__Pin messages :__ {pin}\n"
-    output += f"__Add admins :__ {add_a}\n"
-    output += f"__Manage call :__ {call}\n"
-    await edit_or_reply(event, output)
-
-
-@bot.on(admin_cmd(pattern="admins ?(.*)"))
-@bot.on(sudo_cmd(pattern="admins ?(.*)", allow_sudo=True))
-async def _(event):
-    if event.fwd_from:
-        return
-    mentions = "**Admins in this Group**: \n"
+    mentions = "** ⪼ٖ المشرفـون في ۿذه المجمـوعۿہٰ 𓆰:** \n"
     reply_message = None
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
@@ -71,7 +56,7 @@ async def _(event):
     to_write_chat = await event.get_input_chat()
     chat = None
     if input_str:
-        mentions_heading = "Admins in {} Group: \n".format(input_str)
+        mentions_heading = "⪼ٖ المشرفـون في {} المجمـوعۿہٰ 𓆰: \n".format(input_str)
         mentions = mentions_heading
         try:
             chat = await event.client.get_entity(input_str)
@@ -81,14 +66,14 @@ async def _(event):
     else:
         chat = to_write_chat
         if not event.is_group:
-            await edit_or_reply(event, "Are you sure this is a group?")
+            await edit_or_reply(event, "هل أنت متأكد من أن هذه مجموعة؟")
             return
     try:
         async for x in event.client.iter_participants(
             chat, filter=ChannelParticipantsAdmins
         ):
             if not x.deleted and isinstance(x.participant, ChannelParticipantCreator):
-                mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(
+                mentions += "\n المالك [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
                 )
         mentions += "\n"
@@ -99,7 +84,7 @@ async def _(event):
                 mentions += "\n `{}`".format(x.id)
             else:
                 if isinstance(x.participant, ChannelParticipantAdmin):
-                    mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                    mentions += "\n ⪼ [{}](tg://user?id={}) `{}`".format(
                         x.first_name, x.id, x.id
                     )
     except Exception as e:
@@ -111,19 +96,19 @@ async def _(event):
     await event.delete()
 
 
-@bot.on(admin_cmd(pattern="bots ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="bots ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="البوتات ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="البوتات ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "**Bots in this Group**: \n"
+    mentions = "** ⪼ٖ البوتـات في ۿذه المجمـوعۿہٰ ༗** \n"
     input_str = event.pattern_match.group(1)
     to_write_chat = await event.get_input_chat()
     chat = None
     if not input_str:
         chat = to_write_chat
     else:
-        mentions = "Bots in {} Group: \n".format(input_str)
+        mentions = "⪼ٖ البوتـات في {} المجمـوعۿہٰ ༗ \n".format(input_str)
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
@@ -134,11 +119,11 @@ async def _(event):
             chat, filter=ChannelParticipantsBots
         ):
             if isinstance(x.participant, ChannelParticipantAdmin):
-                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                mentions += "\n ⪼ [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
                 )
             else:
-                mentions += "\n [{}](tg://user?id={}) `{}`".format(
+                mentions += "\n ⪼ [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
                 )
     except Exception as e:
@@ -146,12 +131,12 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@bot.on(admin_cmd(pattern=r"users ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"users ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"الاعضاء ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"الاعضاء ?(.*)", allow_sudo=True))
 async def get_users(show):
     if show.fwd_from:
         return
-    mentions = "**Users in this Group**: \n"
+    mentions = "**⪼ٖ المستخدمـون في ۿذه المجمـوعۿہٰ**  𓎤: \n"
     reply_to_id = None
     if show.reply_to_msg_id:
         reply_to_id = show.reply_to_msg_id
@@ -159,33 +144,35 @@ async def get_users(show):
     await show.get_input_chat()
     if not input_str:
         if not show.is_group:
-            await edit_or_reply(show, "`Are you sure this is a group?`")
+            await edit_or_reply(show, "**هل أنت متأكد من أن هذه مجموعة?**")
             return
     else:
-        mentions_heading = "Users in {} Group: \n".format(input_str)
+        mentions_heading = "⪼ٖ الاعضاء  في {} المجمـوعۿہٰ ༗: \n".format(input_str)
         mentions = mentions_heading
         try:
             chat = await show.client.get_entity(input_str)
         except Exception as e:
             await edit_delete(show, f"`{str(e)}`", 10)
-    catevent = await edit_or_reply(show, "`getting users list wait...`  ")
+    catevent = await edit_or_reply(
+        show, "**⪼ٖ الحصول على قائمه المستخدميـن انتظر ..**  "
+    )
     try:
         if not show.pattern_match.group(1):
             async for user in show.client.iter_participants(show.chat_id):
                 if not user.deleted:
                     mentions += (
-                        f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
+                        f"\n ⪼ [{user.first_name}](tg://user?id={user.id}) `{user.id}`"
                     )
                 else:
-                    mentions += f"\nDeleted Account `{user.id}`"
+                    mentions += f"\n ⪼ حساب محذوف `{user.id}`"
         else:
             async for user in show.client.iter_participants(chat.id):
                 if not user.deleted:
                     mentions += (
-                        f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
+                        f"\n ⪼ [{user.first_name}](tg://user?id={user.id}) `{user.id}`"
                     )
                 else:
-                    mentions += f"\nDeleted Account `{user.id}`"
+                    mentions += f"\n ⪼ حساب محذوف `{user.id}`"
     except Exception as e:
         mentions += " " + str(e) + "\n"
     if len(mentions) > Config.MAX_MESSAGE_SIZE_LIMIT:
@@ -204,10 +191,10 @@ async def get_users(show):
         await catevent.edit(mentions)
 
 
-@bot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="المجموعه(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="المجموعه(?: |$)(.*)", allow_sudo=True))
 async def info(event):
-    catevent = await edit_or_reply(event, "`Analysing the chat...`")
+    catevent = await edit_or_reply(event, "**⪼ تحليل الدردشـه جـاري...**")
     chat = await get_chatinfo(event, catevent)
     caption = await fetch_info(chat, event)
     try:
@@ -215,9 +202,245 @@ async def info(event):
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, f"**Error in chatinfo : **\n`{str(e)}`"
+                BOTLOG_CHATID, f"**خطأ في معلومات الدردشه : **\n`{str(e)}`"
             )
-        await catevent.edit("`An unexpected error has occurred.`")
+        await catevent.edit("**لقد حدث خطأ غير متوقع**")
+
+
+@bot.on(admin_cmd(pattern="مسح المحظورين ?(.*)"))
+@bot.on(sudo_cmd(pattern="مسح المحظورين ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    if input_str:
+        logger.info("⪼ لم يتم التنفيذ بعد")
+    else:
+        if event.is_private:
+            return False
+        et = await edit_or_reply(event, "⪼ البحث في قـوائم المشارڪين ...")
+        p = 0
+        async for i in bot.iter_participants(
+            event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
+        ):
+            rights = ChatBannedRights(until_date=0, view_messages=False)
+            try:
+                await bot(
+                    functions.channels.EditBannedRequest(event.chat_id, i, rights)
+                )
+            except FloodWaitError as ex:
+                logger.warn("⪼ النوم ل {} ثواني".format(ex.seconds))
+                await asyncio.sleep(ex.seconds)
+            except Exception as ex:
+                await et.edit(str(ex))
+            else:
+                p += 1
+        await et.edit("⪼ {} **↩︎ {} غير محظور**".format(event.chat_id, p))
+
+
+@bot.on(admin_cmd(pattern="الاحصائيات ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="الاحصائيات ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    if event.is_private:
+        return False
+    input_str = event.pattern_match.group(1)
+    if input_str:
+        chat = await event.get_chat()
+        if not chat.admin_rights and not chat.creator:
+            await edit_or_reply(event, "**⪼ انت لسته مشرف ههنا 𓆰،**")
+            return False
+    p = 0
+    b = 0
+    c = 0
+    d = 0
+    e = []
+    m = 0
+    n = 0
+    y = 0
+    w = 0
+    o = 0
+    q = 0
+    r = 0
+    et = await edit_or_reply(event, "**⪼ البحث في قـوائم المشارڪين ..**")
+    async for i in bot.iter_participants(event.chat_id):
+        p += 1
+        #
+        # Note that it's "reversed". You must set to ``True`` the permissions
+        # you want to REMOVE, and leave as ``None`` those you want to KEEP.
+        rights = ChatBannedRights(until_date=None, view_messages=True)
+        if isinstance(i.status, UserStatusEmpty):
+            y += 1
+            if "y" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if status:
+                    c += 1
+                else:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+        if isinstance(i.status, UserStatusLastMonth):
+            m += 1
+            if "m" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if status:
+                    c += 1
+                else:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+        if isinstance(i.status, UserStatusLastWeek):
+            w += 1
+            if "w" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if status:
+                    c += 1
+                else:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+        if isinstance(i.status, UserStatusOffline):
+            o += 1
+            if "o" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if not status:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+                else:
+                    c += 1
+        if isinstance(i.status, UserStatusOnline):
+            q += 1
+            if "q" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if not status:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+                else:
+                    c += 1
+        if isinstance(i.status, UserStatusRecently):
+            r += 1
+            if "r" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if status:
+                    c += 1
+                else:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+        if i.bot:
+            b += 1
+            if "b" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if not status:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+                    break
+                else:
+                    c += 1
+        elif i.deleted:
+            d += 1
+            if "d" in input_str:
+                status, e = await ban_user(event.chat_id, i, rights)
+                if status:
+                    c += 1
+                else:
+                    await et.edit("أحتاج امتيازات المشرف لأداء هذا الإجراء!")
+                    e.append(str(e))
+        elif i.status is None:
+            n += 1
+    if input_str:
+        required_string = """𓆰 𝑺𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑮𝑹𝑼𝑶𝑷 𝑺𝑻𝑨𝑻𝑺 𓆪\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻 
+⪼ المطرودين {} / {} المستخدمين
+⪼ **الحسابات المحذوفه ↫** {}
+⪼ **اخر ظهور منذ زمن طويل ↫** {}
+⪼ **اخر ظهور منذ شهر ↫** {}
+⪼ **اخر ظهور منذ اسبوع ↫** {}
+⪼ **غير متصل ↫** {}
+⪼ **متصل ↫** {}
+⪼ **اخر ظهور قبل قليل ↫** {}
+⪼ **البوتات ↫** {}
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻"""
+        await et.edit(required_string.format(c, p, d, y, m, w, o, q, r, b, n))
+        await asyncio.sleep(5)
+    await et.edit(
+        """𓆰 𝑺𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑮𝑹𝑼𝑶𝑷 𝑺𝑻𝑨𝑻𝑺 𓆪\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻
+⪼ **العدد ↫ {} **مستخدماً
+⪼ **الحسابات المحذوفه ↫** {}
+⪼ **اخر ظهور منذ زمن طويل ↫** {}
+⪼ **اخر ظهور منذ شهر ↫** {}
+⪼ **اخر ظهور منذ اسبوع ↫** {}
+⪼ **غير متصل ↫** {}
+⪼ **متصل ↫** {}
+⪼ **اخر ظهور قبل قليل ↫** {}
+⪼ **البوتات ↫** {}
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻""".format(
+            p, d, y, m, w, o, q, r, b, n
+        )
+    )
+
+
+# Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
+@bot.on(admin_cmd(pattern=f"تنظيف الحسابات ?(.*)"))
+@bot.on(sudo_cmd(pattern="تنظيف الحسابات ?(.*)", allow_sudo=True))
+async def rm_deletedacc(show):
+    con = show.pattern_match.group(1).lower()
+    del_u = 0
+    del_status = "** ⪼ لاتوجـد حسـابات محذوفه في هذه المجمـوعه ༗**"
+    if con != "المحذوفه":
+        event = await edit_or_reply(show, "**⪼ جـاري البحـث عن الحسابات المحـذوفه 𓆰.**")
+        async for user in show.client.iter_participants(show.chat_id):
+            if user.deleted:
+                del_u += 1
+                await sleep(0.5)
+        if del_u > 0:
+            del_status = f"⪼ تم العثور على**{del_u}** حساب محذوف\
+                           \nللتنظيف استخدم `.تنظيف الحسابات المحذوفه` 𓆰."
+        await event.edit(del_status)
+        return
+    chat = await show.get_chat()
+    admin = chat.admin_rights
+    creator = chat.creator
+    if not admin and not creator:
+        await edit_delete(show, "**𓍹 انا لست مشرف هنا 𓍻**", 5)
+        return
+    event = await edit_or_reply(show, "**⪼ جاري تنظيف المجموعه من الحسابات المحذوفه**")
+    del_u = 0
+    del_a = 0
+    async for user in show.client.iter_participants(show.chat_id):
+        if user.deleted:
+            try:
+                await show.client.kick_participant(show.chat_id, user.id)
+                await sleep(0.5)
+                del_u += 1
+            except ChatAdminRequiredError:
+                await edit_delete(event, "**ليس لدي حقوق حظر في هذه المجموعة**", 5)
+                return
+            except UserAdminInvalidError:
+                del_a += 1
+    if del_u > 0:
+        del_status = f"⪼ تم تنظيف **{del_u}** حساب وهمي 𓆰."
+    if del_a > 0:
+        del_status = f"⪼ تم تنظيف **{del_u}** حساب وهمي \
+        \n**{del_a}** لا تتم إزالة حسابات المشرف المحذوفة 𓆰."
+    await edit_delete(event, del_status, 5)
+    if BOTLOG:
+        await show.client.send_message(
+            BOTLOG_CHATID,
+            f"#تنظيف_المحذوفين\
+            \n ⪼{del_status}\
+            \n ⪼ الدردشه: {show.chat.title}(`{show.chat_id}`)",
+        )
+
+
+async def ban_user(chat_id, i, rights):
+    try:
+        await bot(functions.channels.EditBannedRequest(chat_id, i, rights))
+        return True, None
+    except Exception as exc:
+        return False, str(exc)
 
 
 async def get_chatinfo(event, catevent):
@@ -263,7 +486,7 @@ async def fetch_info(chat, event):
     broadcast = (
         chat_obj_info.broadcast if hasattr(chat_obj_info, "broadcast") else False
     )
-    chat_type = "Channel" if broadcast else "Group"
+    chat_type = "القنـاة" if broadcast else "المجمـوعه"
     chat_title = chat_obj_info.title
     warn_emoji = emojize(":warning:")
     try:
@@ -283,12 +506,13 @@ async def fetch_info(chat, event):
         msg_info = None
         print("Exception:", e)
     # No chance for IndexError as it checks for msg_info.messages first
-    first_msg_valid = bool(
-        msg_info and msg_info.messages and msg_info.messages[0].id == 1
+    first_msg_valid = (
+        True
+        if msg_info and msg_info.messages and msg_info.messages[0].id == 1
+        else False
     )
-
     # Same for msg_info.users
-    creator_valid = bool(first_msg_valid and msg_info.users)
+    creator_valid = True if first_msg_valid and msg_info.users else False
     creator_id = msg_info.users[0].id if creator_valid else None
     creator_firstname = (
         msg_info.users[0].first_name
@@ -354,14 +578,14 @@ async def fetch_info(chat, event):
     bots_list = chat.full_chat.bot_info  # this is a list
     bots = 0
     supergroup = (
-        "<b>Yes</b>"
+        "<b>نعم</b>"
         if hasattr(chat_obj_info, "megagroup") and chat_obj_info.megagroup
-        else "No"
+        else "لا"
     )
     slowmode = (
-        "<b>Yes</b>"
+        "<b>مفعل</b>"
         if hasattr(chat_obj_info, "slowmode_enabled") and chat_obj_info.slowmode_enabled
-        else "No"
+        else "معطل"
     )
     slowmode_time = (
         chat.full_chat.slowmode_seconds
@@ -399,67 +623,70 @@ async def fetch_info(chat, event):
         except Exception as e:
             print("Exception:", e)
     if bots_list:
-        for _ in bots_list:
+        for bot in bots_list:
             bots += 1
 
-    caption = "<b>CHAT INFO:</b>\n"
-    caption += f"ID: <code>{chat_obj_info.id}</code>\n"
+    caption = "<b> 𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑮𝑹𝑼𝑶𝑷 𝑫𝑨𝑻𝑨 𓆪\n𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻 </b>\n"
+    caption += f"⪼ ايـدي المجمـوعه : <code>{chat_obj_info.id}</code>\n"
     if chat_title is not None:
-        caption += f"{chat_type} name: {chat_title}\n"
+        caption += f"⪼ اسـم {chat_type} : {chat_title}\n"
     if former_title is not None:  # Meant is the very first title
-        caption += f"Former name: {former_title}\n"
+        caption += f"⪼ الاسـم السـايق : {former_title}\n"
     if username is not None:
-        caption += f"{chat_type} type: Public\n"
-        caption += f"Link: {username}\n"
+        caption += f"⪼ نـوع {chat_type} : عامة\n"
+        caption += f"⪼ الرابـط : {username}\n"
     else:
-        caption += f"{chat_type} type: Private\n"
+        caption += f"⪼ نـوع {chat_type} : خاصة\n"
     if creator_username is not None:
-        caption += f"Creator: {creator_username}\n"
+        caption += f"⪼ المنشـئ : {creator_username}\n"
     elif creator_valid:
         caption += (
-            f'Creator: <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
+            f'⪼ المنشـئ : <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
         )
     if created is not None:
-        caption += f"Created: <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
+        caption += f"⪼ الانشـاء : <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
     else:
-        caption += f"Created: <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
-    caption += f"Data Centre ID: {dc_id}\n"
+        caption += f"⪼ الانشـاء :  <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
+    caption += f"⪼ مركـز البيـانات : {dc_id}\n"
     if exp_count is not None:
         chat_level = int((1 + sqrt(1 + 7 * exp_count / 14)) / 2)
-        caption += f"{chat_type} level: <code>{chat_level}</code>\n"
+        caption += f"⪼ مستوى {chat_type} : <code>{chat_level}</code>\n"
     if messages_viewable is not None:
-        caption += f"Viewable messages: <code>{messages_viewable}</code>\n"
+        caption += f"⪼ الرسائل القابلة للعرض : <code>{messages_viewable}</code>\n"
     if messages_sent:
-        caption += f"Messages sent: <code>{messages_sent}</code>\n"
+        caption += f"⪼ الرسائل المرسـله :  <code>{messages_sent}</code>\n"
     elif messages_sent_alt:
-        caption += f"Messages sent: <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        caption += (
+            f"⪼ الرسائل المرسـله : <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        )
     if members is not None:
-        caption += f"Members: <code>{members}</code>\n"
+        caption += f"⪼ الاعضـاء : <code>{members}</code>\n"
     if admins is not None:
-        caption += f"Administrators: <code>{admins}</code>\n"
+        caption += f"⪼ المشـرفين : <code>{admins}</code>\n"
     if bots_list:
-        caption += f"Bots: <code>{bots}</code>\n"
+        caption += f"⪼ البـوتات : <code>{bots}</code>\n"
     if members_online:
-        caption += f"Currently online: <code>{members_online}</code>\n"
+        caption += f"⪼ المتـصلون : <code>{members_online}</code>\n"
     if restrcited_users is not None:
-        caption += f"Restricted users: <code>{restrcited_users}</code>\n"
+        caption += f"⪼ المقيـدون : <code>{restrcited_users}</code>\n"
     if banned_users is not None:
-        caption += f"Banned users: <code>{banned_users}</code>\n"
+        caption += f"⪼ المحظـورون : <code>{banned_users}</code>\n"
     if group_stickers is not None:
-        caption += f'{chat_type} stickers: <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>\n'
-    caption += "\n"
+        caption += f'⪼ ملصـقات {chat_type}: <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>\n'
+    #     caption += "\n"
     if not broadcast:
-        caption += f"Slow mode: {slowmode}"
+        caption += f"⪼ الارسـال البطيئ : {slowmode}"
         if (
             hasattr(chat_obj_info, "slowmode_enabled")
             and chat_obj_info.slowmode_enabled
         ):
             caption += f", <code>{slowmode_time}s</code>\n\n"
         else:
-            caption += "\n\n"
-        caption += f"Supergroup: {supergroup}\n\n"
-    if hasattr(chat_obj_info, "restricted"):
-        caption += f"Restricted: {restricted}\n"
+            caption += "\n"
+    if not broadcast:
+        caption += f"⪼ المجموعة خارقه: {supergroup}\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
+        #     if hasattr(chat_obj_info, "restricted"):
+        #         caption += f"محدد: {restricted}\n"
         if chat_obj_info.restricted:
             caption += f"> Platform: {chat_obj_info.restriction_reason[0].platform}\n"
             caption += f"> Reason: {chat_obj_info.restriction_reason[0].reason}\n"
@@ -468,25 +695,32 @@ async def fetch_info(chat, event):
             caption += "\n"
     if hasattr(chat_obj_info, "scam") and chat_obj_info.scam:
         caption += "Scam: <b>Yes</b>\n\n"
-    if hasattr(chat_obj_info, "verified"):
-        caption += f"Verified by Telegram: {verified}\n\n"
-    if description:
-        caption += f"Description: \n<code>{description}</code>\n"
+        #     if hasattr(chat_obj_info, "verified"):
+        #         caption += f"تم التحقق بواسطة تلكرام: {verified}\n"
+        #     if description:
+        caption += f"الوصف: \n<code>{description}</code>\n"
+        caption = f"<b>𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙞𝘾𝙎𝙎  - [𝘿𝙀𝙑](t.me/rruuurr) 𓆪</b>"
     return caption
 
 
 CMD_HELP.update(
     {
         "groupdata": "**Plugin : **`groupdata`\
-    \n\n•  **Syntax : **`.adminperm (username/reply)`\
-    \n•  **Function : **__Shows you the admin permissions in the group.__\
-    \n\n•  **Syntax : **`.admins or .admins <username of group >`\
-    \n•  **Function : **__Retrieves a list of admins in the chat.__\
-    \n\n•  **Syntax : **`.bots or .bots <username of group >`\
-    \n•  **Function : **__Retrieves a list of bots in the chat.__\
-    \n\n•  **Syntax : **`.users or .users <name of member>`\
-    \n•  **Function : **__Retrieves all (or queried) users in the chat.__\
-    \n\n•  **Syntax : **`.chatinfo or .chatinfo <username of group>`\
-    \n•  **Function : **__Shows you the total information of the required chat.__"
+    \n\n**Syntax : **`.kickme`\
+    \n**Usage : **__Throws you away from that chat_\
+    \n\n**Syntax : **`.admins or .admins <username of group >`\
+    \n**Usage : **__Retrieves a list of admins in the chat.__\
+    \n\n**Syntax : **`.bots or .bots <username of group >`\
+    \n**Usage : **__Retrieves a list of bots in the chat.__\
+    \n\n**Syntax : **`.users or .users <name of member>`\
+    \n**Function : **__Retrieves all (or queried) users in the chat.__\
+    \n\n**Syntax : **`.unbanall`\
+    \n**Function: **__Unbans everyone who are blocked in that group __\
+    \n\n**Syntax : **`.ikuck`\
+    \n**Function: **__stats of the group like no of users no of deleted users.__\
+    \n\n**Syntax : **`.chatinfo or .chatinfo <username of group>`\
+    \n**Function : **__Shows you the total information of the required chat.__\
+    \n\n**Syntax : **`.zombies`\
+    \n**Function : **__Searches for deleted accounts in a group. Use `.zombies clean` to remove deleted accounts from the group.__"
     }
 )
