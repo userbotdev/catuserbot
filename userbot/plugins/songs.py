@@ -1,7 +1,7 @@
 """
-by  @sandy1709 ( https://t.me/mrconfused  )
+Edit by: @rruuurr ( https://t.me/rruuurr  )
 """
-# songs finder for catuserbot
+# songs finder for Icss
 
 import asyncio
 import base64
@@ -26,8 +26,8 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 # =========================================================== #
 
 
-@bot.on(admin_cmd(pattern="(song|song320)($| (.*))"))
-@bot.on(sudo_cmd(pattern="(song|song320)($| (.*))", allow_sudo=True))
+@bot.on(admin_cmd(pattern="(بحث|song320)($| (.*))"))
+@bot.on(sudo_cmd(pattern="(بحث|song320)($| (.*))", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -42,14 +42,14 @@ async def _(event):
         await edit_or_reply(event, "`What I am Supposed to find `")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "**⪼ جاري البحث عن الاغنـيه 🖤🎧 ،**")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
     cmd = event.pattern_match.group(1)
-    if cmd == "song":
+    if cmd == "بحث":
         q = "128k"
     elif cmd == "song320":
         q = "320k"
@@ -76,7 +76,7 @@ async def _(event):
         return await catevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("** ⪼ جاري تحميل الاغنيه انتظر قليلا🖤🎧 .**")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -107,8 +107,8 @@ async def delete_messages(event, chat, from_message):
     await event.client.send_read_acknowledge(chat)
 
 
-@bot.on(admin_cmd(pattern="vsong( (.*)|$)"))
-@bot.on(sudo_cmd(pattern="vsong( (.*)|$)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="يوتيوب( (.*)|$)"))
+@bot.on(sudo_cmd(pattern="يوتيوب( (.*)|$)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -123,7 +123,7 @@ async def _(event):
         event = await edit_or_reply(event, "What I am Supposed to find")
         return
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "**⪼ جاري البحث عن الاغنـيه 🖤🎧 ،**")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
@@ -154,7 +154,7 @@ async def _(event):
         return await catevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("** ⪼ جاري تحميل الاغنيه انتظر قليلا🖤🎧 .**")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -203,8 +203,6 @@ async def cat_song_fetcer(event):
                 )
             await catevent.edit(SONG_SENDING_STRING, parse_mode="html")
             await baka[0].click(0)
-            await conv.get_response()
-            await conv.get_response()
             music = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -224,14 +222,14 @@ async def cat_song_fetcer(event):
 CMD_HELP.update(
     {
         "songs": "**Plugin : **`songs`\
-        \n\n•**Syntax : **`.song <query/reply>`\
-        \n•**Function : **__searches the song you entered in query from youtube and sends it, quality of it is 128k__\
-        \n\n•**Syntax : **`.song320 <query/reply>`\
-        \n•**Function : **__searches the song you entered in query from youtube and sends it quality of it is 320k__\
-        \n\n•**Syntax : **`.vsong <query/reply>`\
-        \n•**Function : **__Searches the video song you entered in query and sends it__\
-        \n\n•**Syntax : **`.song2 query`\
-        \n•**Function : **__searches the song you entered in query and sends it quality of it is 320k__\
+        \n\n  •**Syntax : **`.song <query/reply>`\
+        \n  •**Function : **__searches the song you entered in query from youtube and sends it, quality of it is 128k__\
+        \n\n  •**Syntax : **`.song320 <query/reply>`\
+        \n  •**Function : **__searches the song you entered in query from youtube and sends it quality of it is 320k__\
+        \n\n  •**Syntax : **`.vsong <query/reply>`\
+        \n  •**Function : **__Searches the video song you entered in query and sends it__\
+        \n\n  •**Syntax : **`.song2 query`\
+        \n  •**Function : **__searches the song you entered in query and sends it quality of it is 320k__\
         "
     }
 )
