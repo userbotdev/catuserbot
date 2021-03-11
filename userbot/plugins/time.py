@@ -1,4 +1,5 @@
-# Userbot timezone
+# icss timezone
+# edit by @rruuurr
 
 import os
 from datetime import datetime as dt
@@ -39,11 +40,11 @@ async def get_tz(con):
         return
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="ctime(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?"))
+@bot.on(admin_cmd(outgoing=True, pattern="الوقت(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?"))
 @bot.on(
     sudo_cmd(
         outgoing=True,
-        pattern="ctime(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?",
+        pattern="الوقت(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?",
         allow_sudo=True,
     )
 )
@@ -71,7 +72,7 @@ async def time_func(tdata):
     else:
         await edit_or_reply(
             tdata,
-            f"`It's`  **{dt.now().strftime(t_form)}**` on `**{dt.now().strftime(d_form)}** `here.`",
+            f"𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺 - 𝑻𝑰𝑴𝑬𝒁𝑶𝑵𝑬 𓆪 \n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻 \n⪼ الوقت  **{dt.now().strftime(t_form)}** في **{dt.now().strftime(d_form)}**",
         )
         return
     if not timezones:
@@ -113,8 +114,8 @@ async def time_func(tdata):
         return
 
 
-@bot.on(admin_cmd(pattern="time ?(.*)"))
-@bot.on(sudo_cmd(pattern="time ?(.*)", allow_sudo=True))
+# @bot.on(admin_cmd(pattern="time ?(.*)"))
+# @bot.on(sudo_cmd(pattern="time ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
