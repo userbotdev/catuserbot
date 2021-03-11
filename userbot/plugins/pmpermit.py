@@ -50,7 +50,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event, secondgroup=True)
             if not user:
-                return
+                return await edit_delete(event, "**تعذر جلب المتسخدم**", 5)
             if not reason:
                 reason = "Not mentioned"
         if not pmpermit_sql.is_approved(user.id):
@@ -72,8 +72,8 @@ if Config.PRIVATE_GROUP_ID is not None:
                     await event.client.delete_messages(
                         user.id, PMMESSAGE_CACHE[user.id]
                     )
-                except Exception as e:
-                    LLGS.info(str(e))
+                except:
+                    pass
         else:
             await edit_delete(
                 event,
@@ -93,7 +93,7 @@ if Config.PRIVATE_GROUP_ID is not None:
             if reason == "all":
                 return
             if not user:
-                return
+                return await edit_delete(event, "**تعذر جلب المتسخدم**", 5)
         if user.id in PM_START:
             PM_START.remove(user.id)
         if pmpermit_sql.is_approved(user.id):
@@ -116,7 +116,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return
+                return await edit_delete(event, "**تعذر جلب المستخدم**", 5)
         if user.id in PM_START:
             PM_START.remove(user.id)
         await event.edit(
@@ -131,7 +131,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return
+                return await edit_delete(event, "**تعذر جلب المستخدم**", 5)
         await event.client(functions.contacts.UnblockRequest(user.id))
         await event.edit(
             f"** ⪼ أنت غير محظور الآن. يمكنك مراسلتي من الآن ..** [{user.first_name}](tg://user?id={user.id})"
@@ -199,7 +199,7 @@ if Config.PRIVATE_GROUP_ID is not None:
     async def do_pm_permit_action(chat_id, event, sender):
         if chat_id not in PM_WARNS:
             PM_WARNS.update({chat_id: 0})
-        if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_PMs:
+        if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_P_M_s:
             r = await event.reply(USER_BOT_WARN_ZERO)
             await asyncio.sleep(1)
             await event.client(functions.contacts.BlockRequest(chat_id))
@@ -251,8 +251,8 @@ if Config.PRIVATE_GROUP_ID is not None:
                         totalwarns=totalwarns,
                         warns=warns,
                     )
-                    + "\n"
-                    + "𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𝐢𝐜𝐬𝐬ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻"
+                    + "\n\n"
+                    + "**𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𝐢𝐜𝐬𝐬ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻**"
                 )
             else:
 
