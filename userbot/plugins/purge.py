@@ -35,13 +35,13 @@ async def fastpurger(purg):
         await purg.client.delete_messages(chat, msgs)
     done = await purg.client.send_message(
         purg.chat_id,
-        "**⪼ اكتمل الحذف السريع ❕**\nحذف " + str(count) + " رساله.",
+        "**⪼ اكتمل الحذف السريع ❕**\n⪼ حذف " + str(count) + " رساله 𓆰",
     )
 
     if BOTLOG:
         await purg.client.send_message(
             BOTLOG_CHATID,
-            "#التنظيف \n تم تنظيف " + str(count) + " رساله بنجاح",
+            "#التنظيف \n⪼ تم تنظيف " + str(count) + " رساله بنجاح 𓆰",
         )
     await sleep(2)
     await done.delete()
