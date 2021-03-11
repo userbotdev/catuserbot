@@ -1,4 +1,4 @@
-# for -<*>~ SOURCE ICSS ~<*>- By: @rruuurr
+# for -<*>~ SOURCE ICSS ~<*>- edit By: @rruuurr
 
 import asyncio
 import io
