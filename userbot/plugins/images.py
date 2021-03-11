@@ -1,12 +1,12 @@
-# image search for catuserbot
+# image search for Icss
 import os
 import shutil
 
 from ..helpers.google_image_download import googleimagesdownload
 
 
-@bot.on(admin_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)"))
-@bot.on(sudo_cmd(pattern=r"img(?: |$)(\d*)? ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"صور(?: |$)(\d*)? ?(.*)"))
+@bot.on(sudo_cmd(pattern=r"صور(?: |$)(\d*)? ?(.*)", allow_sudo=True))
 async def img_sampler(event):
     if event.fwd_from:
         return
@@ -18,9 +18,9 @@ async def img_sampler(event):
         query = str(event.pattern_match.group(2))
     if not query:
         return await edit_or_reply(
-            event, "Reply to a message or pass a query to search!"
+            event, "**╮ الرد ﮼؏ الرسالـٓھہ للبحث او ضعها مع الامر𓅫╰**"
         )
-    cat = await edit_or_reply(event, "`Processing...`")
+    cat = await edit_or_reply(event, "**╮ ❐ جـاري البحث عن الصـوره 𓅫╰**")
     if event.pattern_match.group(1) != "":
         lim = int(event.pattern_match.group(1))
         if lim > 10:
