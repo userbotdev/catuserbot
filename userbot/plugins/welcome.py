@@ -1,4 +1,4 @@
-# ported from paperplaneExtended by avinashreddy3108 for media support
+# welcome code for icss edit by: @rruuurr
 
 from telethon import events
 
@@ -77,8 +77,8 @@ async def _(event):
         update_previous_welcome(event.chat_id, current_message.id)
 
 
-@bot.on(admin_cmd(pattern=r"savewelcome ?(.*)"))
-@bot.on(sudo_cmd(pattern=r"savewelcome ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"ترحيب ?(.*)"))
+@bot.on(sudo_cmd(pattern=r"ترحيب ?(.*)", allow_sudo=True))
 async def save_welcome(event):
     if event.fwd_from:
         return
@@ -89,9 +89,9 @@ async def save_welcome(event):
         if BOTLOG_CHATID:
             await bot.send_message(
                 BOTLOG_CHATID,
-                f"#WELCOME_NOTE\
-                \nCHAT ID: {event.chat_id}\
-                \nThe following message is saved as the welcome note for the {event.chat.title}, Don't delete this message !!",
+                f"#الترحيب\
+                \n ⪼ ايدي الدردشة: {event.chat_id}\
+                \n ⪼ يتم حفظ الرسالة التالية كملاحظة ترحيب لـ {event.chat.title}, لا تحذف هذه الرسالة !!",
             )
             msg_o = await event.client.forward_messages(
                 entity=BOTLOG_CHATID, messages=msg, from_peer=event.chat_id, silent=True
@@ -100,50 +100,59 @@ async def save_welcome(event):
         else:
             await edit_or_reply(
                 event,
-                "`Saving media as part of the welcome note requires the BOTLOG_CHATID to be set.`",
+                "**يتطلب حفظ الوسائط كجزء من الملاحظة الترحيبية تعيين BOTLOG_CHATID.**",
             )
             return
     elif event.reply_to_msg_id and not string:
         rep_msg = await event.get_reply_message()
         string = rep_msg.text
-    success = "`Welcome note {} for this chat.`"
+    success = "** ⪼ تم {} التـرحيب في هذه الدردشـه 𓆰، **"
     if add_welcome_setting(event.chat_id, 0, string, msg_id) is True:
-        return await edit_or_reply(event, success.format("saved"))
+        return await edit_or_reply(event, success.format("حفـظ"))
     rm_welcome_setting(event.chat_id)
     if add_welcome_setting(event.chat_id, 0, string, msg_id) is True:
-        return await edit_or_reply(event, success.format("updated"))
-    await edit_or_reply("Error while setting welcome in this group")
+        return await edit_or_reply(event, success.format("تحـديث"))
+    await edit_or_reply("خطأ أثناء تعيين الترحيب في هذه المجموعة")
 
 
-@bot.on(admin_cmd(pattern="clearwelcome$"))
-@bot.on(sudo_cmd(pattern="clearwelcome$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="حذف ترحيب$"))
+@bot.on(sudo_cmd(pattern="حذف ترحيب$", allow_sudo=True))
 async def del_welcome(event):
     if event.fwd_from:
         return
     if rm_welcome_setting(event.chat_id) is True:
-        await edit_or_reply(event, "`Welcome note deleted for this chat.`")
+        await edit_or_reply(
+            event,
+            "** ⪼ تم حـذف الترحيب في هـذه الدردشـه 𓆰،**",
+        )
     else:
-        await edit_or_reply(event, "`Do I have a welcome note here ?`")
+        await edit_or_reply(
+            event,
+            "** ⪼ ليس هناك اي ترحــيب فـي الـدردشــة 𓆰،**",
+        )
 
 
-@bot.on(admin_cmd(pattern="listwelcome$"))
-@bot.on(sudo_cmd(pattern="listwelcome$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="الترحيب$"))
+@bot.on(sudo_cmd(pattern="الترحيب$", allow_sudo=True))
 async def show_welcome(event):
     if event.fwd_from:
         return
     cws = get_current_welcome_settings(event.chat_id)
     if not cws:
-        await edit_or_reply(event, "`No welcome message saved here.`")
+        await edit_or_reply(
+            event,
+            "** ⪼ لاتوجد رساله ترحيب محفوظة هنا 𓆰،**",
+        )
         return
     if cws.f_mesg_id:
         msg_o = await bot.get_messages(entity=BOTLOG_CHATID, ids=int(cws.f_mesg_id))
         await edit_or_reply(
-            event, "`I am currently welcoming new users with this welcome note.`"
+            event, "** ⪼ أرحب حاليًا بالمستخدمين الجدد بهذه الرساله الترحيبية 𓆰.🜝**"
         )
         await event.reply(msg_o.message, file=msg_o.media)
     elif cws.reply:
         await edit_or_reply(
-            event, "`I am currently welcoming new users with this welcome note.`"
+            event, "** ⪼ أرحب حاليًا بالمستخدمين الجدد بهذه الرساله الترحيبية.🜝**"
         )
         await event.reply(cws.reply)
 
