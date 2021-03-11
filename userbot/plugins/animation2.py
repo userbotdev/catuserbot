@@ -1,13 +1,15 @@
+# animation code for icss edit by @rruuurr
+
 import asyncio
 from collections import deque
 
 
-@bot.on(admin_cmd(pattern="think$", outgoing=True))
-@bot.on(sudo_cmd(pattern="think$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="افكر$", outgoing=True))
+@bot.on(sudo_cmd(pattern="افكر$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "think")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🤔🧐🤔🧐🤔🧐"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -15,12 +17,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=r"lmao$"))
-@bot.on(sudo_cmd(pattern="lmao$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"متت$"))
+@bot.on(sudo_cmd(pattern="متت$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "lmao")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("😂🤣😂🤣😂🤣"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -28,12 +30,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=r"nothappy$"))
-@bot.on(sudo_cmd(pattern="nothappy$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"ضايج$"))
+@bot.on(sudo_cmd(pattern="ضايج$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "nathappy")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("😁☹️😁☹️😁☹️😁"))
     for _ in range(48):
         await asyncio.sleep(0.4)
@@ -41,12 +43,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="clock$"))
-@bot.on(sudo_cmd(pattern="clock$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="ساعه$"))
+@bot.on(sudo_cmd(pattern="ساعه$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "clock")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -54,12 +56,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=r"muah$"))
-@bot.on(sudo_cmd(pattern="muah$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"مح$"))
+@bot.on(sudo_cmd(pattern="مح$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "muah")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("😗😙😚😚😘"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -67,12 +69,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern="heart$"))
-@bot.on(sudo_cmd(pattern="heart$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="قلب$"))
+@bot.on(sudo_cmd(pattern="قلب$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "heart")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("❤️🧡💛💚💙💜🖤"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -80,12 +82,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern="gym$", outgoing=True))
-@bot.on(sudo_cmd(pattern="gym$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="جيم$", outgoing=True))
+@bot.on(sudo_cmd(pattern="جيم$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "gym")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -93,12 +95,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=f"earth$", outgoing=True))
-@bot.on(sudo_cmd(pattern="earth$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"الارض$", outgoing=True))
+@bot.on(sudo_cmd(pattern="الارض$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "earth")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🌏🌍🌎🌎🌍🌏🌍🌎"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -106,12 +108,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="moon$"))
-@bot.on(sudo_cmd(pattern="moon$", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="قمر$"))
+@bot.on(sudo_cmd(pattern="قمر$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "moon")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🌗🌘🌑🌒🌓🌔🌕🌖"))
     for _ in range(48):
         await asyncio.sleep(0.1)
@@ -119,15 +121,15 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=f"smoon$", outgoing=True))
-@bot.on(sudo_cmd(pattern="smoon$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"اقمار$", outgoing=True))
+@bot.on(sudo_cmd(pattern="اقمار$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "smoon")
+    event = await edit_or_reply(event, "⇆")
     animation_interval = 0.1
     animation_ttl = range(101)
-    await event.edit("smoon..")
+    await event.edit("⇆")
     animation_chars = [
         "🌗🌗🌗🌗🌗\n🌓🌓🌓🌓🌓\n🌗🌗🌗🌗🌗\n🌓🌓🌓🌓🌓\n🌗🌗🌗🌗🌗",
         "🌘🌘🌘🌘🌘\n🌔🌔🌔🌔🌔\n🌘🌘🌘🌘🌘\n🌔🌔🌔🌔🌔\n🌘🌘🌘🌘🌘",
@@ -143,12 +145,12 @@ async def _(event):
         await event.edit(animation_chars[i % 8])
 
 
-@bot.on(admin_cmd(pattern=f"tmoon$", outgoing=True))
-@bot.on(sudo_cmd(pattern="tmoon$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"قمور$", outgoing=True))
+@bot.on(sudo_cmd(pattern="قمور$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "tmoon")
+    event = await edit_or_reply(event, "⇆")
     animation_interval = 0.1
     animation_ttl = range(96)
     await event.edit("tmoon..")
