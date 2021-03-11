@@ -45,8 +45,8 @@ async def Oof(e):
         await catevent.edit(t)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="type (.*)"))
-@bot.on(sudo_cmd(pattern="type (.*)", allow_sudo=True))
+@bot.on(admin_cmd(outgoing=True, pattern="اكتب (.*)"))
+@bot.on(sudo_cmd(pattern="اكتب (.*)", allow_sudo=True))
 async def typewriter(typew):
     message = typew.pattern_match.group(1)
     sleep_time = 0.2
