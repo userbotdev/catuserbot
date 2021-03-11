@@ -1,3 +1,5 @@
+# for -<*>~ SOURCE ICSS ~<*>- edit By: @rruuurr
+
 import asyncio
 import base64
 
@@ -8,8 +10,8 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from . import BOTLOG, BOTLOG_CHATID
 
 
-@bot.on(admin_cmd(pattern="spam (.*)"))
-@bot.on(sudo_cmd(pattern="spam (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="سبام (.*)"))
+@bot.on(sudo_cmd(pattern="سبام (.*)", allow_sudo=True))
 async def spammer(event):
     if event.fwd_from:
         return
@@ -90,15 +92,15 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             if event.is_private:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#SPAM\n"
-                    + f"Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} messages of \n"
+                    "#سبام\n"
+                    + f"تم تنفيذ البريد العشوائي بنجاح في [دردشة المستخدم](tg://user?id={event.chat_id}) عدد التكرار↫ {counter} \n الرساله↫ "
                     + f"`{spam_message}`",
                 )
             else:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#SPAM\n"
-                    + f"Spam was executed successfully in {event.chat.title}(`{event.chat_id}`) chat  with {counter} messages of \n"
+                    "#سبام\n"
+                    + f"تم تنفيذ البريد العشوائي بنجاح في دردشه {event.chat.title}(`{event.chat_id}`) عدد التكرار↫  {counter} \n الرساله↫ "
                     + f"`{spam_message}`",
                 )
         else:
@@ -146,7 +148,7 @@ async def stickerpack_spam(event):
                 )
             )
         )
-    except Exception:
+    except:
         return await edit_delete(
             catevent,
             "`I guess this sticker is not part of any pack so i cant kang this sticker pack try kang for this sticker`",
