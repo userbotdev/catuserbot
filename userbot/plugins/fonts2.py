@@ -1,10 +1,12 @@
+# fonts for icss edit by: @rruuurr
+
 import random
 
 from . import fonts
 
 
-@bot.on(admin_cmd(pattern="egyptf(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="egyptf(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه10(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه10(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -23,8 +25,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="maref(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="maref(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه11(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه11(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -43,8 +45,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="handcf(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="handcf(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه12(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه12(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -63,8 +65,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="doublef(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="doublef(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه13(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه13(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -83,8 +85,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="mock(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="mock(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه14(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه14(?: |$)(.*)", allow_sudo=True))
 async def spongemocktext(mock):
     reply_text = []
     textx = await mock.get_reply_message()
@@ -107,8 +109,8 @@ async def spongemocktext(mock):
     await edit_or_reply(mock, "".join(reply_text))
 
 
-@bot.on(admin_cmd(pattern="ghostf(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="ghostf(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه15(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه15(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
@@ -127,8 +129,8 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@bot.on(admin_cmd(pattern="handsf(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="handsf(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="زغرفه16(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="زغرفه16(?: |$)(.*)", allow_sudo=True))
 async def stylish_generator(event):
     args = event.pattern_match.group(1)
     if not args:
