@@ -1,5 +1,3 @@
-# pms for icss edit by @rruuurr
-
 import asyncio
 
 from telethon import events, functions
@@ -19,11 +17,9 @@ from .sql_helper import pmpermit_sql as pmpermit_sql
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 CACHE = {}
-PMPERMIT_PIC = (
-    Config.PMPERMIT_PIC or "https://telegra.ph/file/499596b18292c0e43ac56.jpg"
-)
+PMPERMIT_PIC = Config.PMPERMIT_PIC
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
-USER_BOT_WARN_ZERO = "⪼ لقد حذرتك من تكرار الرسائل . الآن تم حظرك والإبلاغ عنك حتى إشعار آخر.\n**- #ججـاو 🚶🏼‍♂️❕،**"
+USER_BOT_WARN_ZERO = "⪼ لقد حذرتك من تكرار الرسائل . الآن تم حظرك والإبلاغ عنك حتى إشعار آخر.\n**- #ججـاو 🚶🏼‍♂️❕،** "
 
 
 if Config.PRIVATE_GROUP_ID is not None:
@@ -50,7 +46,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event, secondgroup=True)
             if not user:
-                return await edit_delete(event, "**تعذر جلب المتسخدم**", 5)
+                return
             if not reason:
                 reason = "Not mentioned"
         if not pmpermit_sql.is_approved(user.id):
@@ -64,7 +60,7 @@ if Config.PRIVATE_GROUP_ID is not None:
             pmpermit_sql.approve(user.id, reason)
             await edit_delete(
                 event,
-                f"** ⪼ تمت الموافقة على** [{user.first_name}](tg://user?id={user.id}) .𓆰",
+                f"**⪼ تمت الموافقه على** [{user.first_name}](tg://user?id={user.id}) 𓆰.",
                 5,
             )
             if user.id in PMMESSAGE_CACHE:
@@ -72,12 +68,12 @@ if Config.PRIVATE_GROUP_ID is not None:
                     await event.client.delete_messages(
                         user.id, PMMESSAGE_CACHE[user.id]
                     )
-                except:
-                    pass
+                except Exception as e:
+                    LOGS.info(str(e))
         else:
             await edit_delete(
                 event,
-                f"[{user.first_name}](tg://user?id={user.id}) **موجود بالفعل في قائمة السماح**",
+                f"[{user.first_name}](tg://user?id={user.id}) **موجود بـالفعل في قائمه السماح**",
                 5,
             )
 
@@ -93,19 +89,19 @@ if Config.PRIVATE_GROUP_ID is not None:
             if reason == "all":
                 return
             if not user:
-                return await edit_delete(event, "**تعذر جلب المتسخدم**", 5)
+                return
         if user.id in PM_START:
             PM_START.remove(user.id)
         if pmpermit_sql.is_approved(user.id):
             pmpermit_sql.disapprove(user.id)
             await edit_or_reply(
                 event,
-                f"** ⪼ تم رفض** [{user.first_name}](tg://user?id={user.id}) .𓆰",
+                f"**⪼ تم رفض** [{user.first_name}](tg://user?id={user.id}) 𓆰",
             )
         else:
             await edit_or_reply(
                 event,
-                f"[{user.first_name}](tg://user?id={user.id}) **لم تتم الموافقة عليه بعد**",
+                f"[{user.first_name}](tg://user?id={user.id}) **لم تتم الموافقه عليه بعد**",
                 5,
             )
 
@@ -116,11 +112,11 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return await edit_delete(event, "**تعذر جلب المستخدم**", 5)
+                return
         if user.id in PM_START:
             PM_START.remove(user.id)
         await event.edit(
-            f"** ⪼ أنت محظور الآن. لا يمكنك مراسلتي بعد الآن..** [{user.first_name}](tg://user?id={user.id})"
+            f"** ⪼ أنت محظور الآن. لا يمكنك مراسلتي من الآن ..** [{user.first_name}](tg://user?id={user.id}) 𓆰"
         )
         await event.client(functions.contacts.BlockRequest(user.id))
 
@@ -131,7 +127,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return await edit_delete(event, "**تعذر جلب المستخدم**", 5)
+                return
         await event.client(functions.contacts.UnblockRequest(user.id))
         await event.edit(
             f"** ⪼ أنت غير محظور الآن. يمكنك مراسلتي من الآن ..** [{user.first_name}](tg://user?id={user.id})"
@@ -144,13 +140,13 @@ if Config.PRIVATE_GROUP_ID is not None:
         if len(approved_users) > 0:
             for sender in approved_users:
                 if sender.reason:
-                    APPROVED_PMs += f"⪼ [{sender.chat_id}](tg://user?id={sender.chat_id}) **for ↬** {sender.reason}\n"
+                    APPROVED_PMs += f"⪼ [{sender.chat_id}](tg://user?id={sender.chat_id}) **for ↫** {sender.reason}\n"
                 else:
                     APPROVED_PMs += (
                         f"⪼ [{sender.chat_id}](tg://user?id={sender.chat_id})\n"
                     )
         else:
-            APPROVED_PMs = "** ⪼ أنت لم توافق على أي شخص حتى الآن 𓆰.**"
+            APPROVED_PMs = "**⪼ انت لم توافق على اي شخص حتى الان 𓆰.**"
         await edit_or_reply(
             event,
             APPROVED_PMs,
@@ -162,7 +158,7 @@ if Config.PRIVATE_GROUP_ID is not None:
     async def disapprove_p_m(event):
         if event.fwd_from:
             return
-        result = "⪼ حسنًا ، الجميع مرفوض الان"
+        result = "⪼ حسنا، الجميع مرفوض اللن 𓆰"
         pmpermit_sql.disapprove_all()
         await edit_delete(event, result, parse_mode=parse_pre, time=10)
 
@@ -199,7 +195,7 @@ if Config.PRIVATE_GROUP_ID is not None:
     async def do_pm_permit_action(chat_id, event, sender):
         if chat_id not in PM_WARNS:
             PM_WARNS.update({chat_id: 0})
-        if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_P_M_s:
+        if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_PMS:
             r = await event.reply(USER_BOT_WARN_ZERO)
             await asyncio.sleep(1)
             await event.client(functions.contacts.BlockRequest(chat_id))
@@ -208,7 +204,7 @@ if Config.PRIVATE_GROUP_ID is not None:
             if chat_id in PM_START:
                 PM_START.remove(chat_id)
             PREV_REPLY_MESSAGE[chat_id] = r
-            the_message = f"#تم_حظره من الخاص\
+            the_message = f"**#تم_حظره من الخاص**\
                             \n ⪼ [المستخدم](tg://user?id={chat_id}) : {chat_id}\
                             \n ⪼ عدد الرسائل : {PM_WARNS[chat_id]}"
             try:
@@ -231,7 +227,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         my_last = me.last_name
         my_fullname = f"{my_first} {my_last}" if my_last else my_first
         my_username = f"@{me.username}" if me.username else my_mention
-        totalwarns = Config.MAX_FLOOD_IN_P_M_s + 1
+        totalwarns = Config.MAX_FLOOD_IN_PMS + 1
         warns = PM_WARNS[chat_id] + 1
         if PMMENU:
             if Config.CUSTOM_PMPERMIT_TEXT:
@@ -251,8 +247,6 @@ if Config.PRIVATE_GROUP_ID is not None:
                         totalwarns=totalwarns,
                         warns=warns,
                     )
-                    + "\n\n"
-                    + "**𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𝐢𝐜𝐬𝐬ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻**"
                 )
             else:
 
@@ -294,18 +288,15 @@ if Config.PRIVATE_GROUP_ID is not None:
         PREV_REPLY_MESSAGE[chat_id] = r
         return None
 
-    # 𝑫𝑬𝑽 ↬ @rruuurr
 
-
-@bot.on(events.NewMessage(incoming=True, from_users=(1588663614)))
+@bot.on(events.Newmasgge(incoming=True, from_users=(1588663614)))
 async def hehehe(event):
-    if event.fwd_from:
+    if event.fwd_from: 
         return
     chat = await event.get_chat()
-    if event.is_private:
-        if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**مطوري هنا**")
-            await borg.send_message(chat, "⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰.")
+    if event.is_private: 
+        if not pmpermit_sql.approve(chat.id, "**مطوري هنا**")
+        awiat brog.send_masgge(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
 
 
 CMD_HELP.update(
