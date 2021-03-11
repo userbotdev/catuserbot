@@ -1,15 +1,17 @@
+# animation3 for icss edit by: @rruuurr
+
 import asyncio
 from collections import deque
 
 from . import mention
 
 
-@bot.on(admin_cmd(pattern=r"star$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"star$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"نجمه$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"نجمه$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "`stars.....`")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🦋✨🦋✨🦋✨🦋✨"))
     for _ in range(48):
         await asyncio.sleep(0.3)
@@ -17,12 +19,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=r"boxs$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"boxs$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"مكعبات$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"مكعبات$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "`boxs...`")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🟥🟧🟨🟩🟦🟪🟫⬛⬜"))
     for _ in range(999):
         await asyncio.sleep(0.3)
@@ -30,12 +32,12 @@ async def _(event):
         deq.rotate(1)
 
 
-@bot.on(admin_cmd(pattern=r"rain$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"rain$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"مطر$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"مطر$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "`Raining.......`")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🌬☁️🌩🌨🌧🌦🌥⛅🌤"))
     for _ in range(48):
         await asyncio.sleep(0.3)
@@ -70,8 +72,8 @@ async def _(event):
         await event.edit(animation_chars[i % 12])
 
 
-@bot.on(admin_cmd(pattern=r"dump ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"dump ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"تفريغ ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"تفريغ ?(.*)", allow_sudo=True))
 async def _(message):
     if message.fwd_from:
         return
@@ -82,7 +84,7 @@ async def _(message):
         inp = " ".join(obj)
     except IndexError:
         inp = "🥞 🎂 🍫"
-    event = await edit_or_reply(message, "`droping....`")
+    event = await edit_or_reply(message, "⇆")
     u, t, g, o, s, n = inp.split(), "🗑", "<(^_^ <)", "(> ^_^)>", "⠀ ", "\n"
     h = [(u[0], u[1], u[2]), (u[0], u[1], ""), (u[0], "", "")]
     for something in reversed(
@@ -113,8 +115,8 @@ async def _(message):
                 return
 
 
-@bot.on(admin_cmd(pattern=r"fleaveme$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"fleaveme$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"فليم$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"فليم$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -139,14 +141,14 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 
-@bot.on(admin_cmd(pattern=r"loveu$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"loveu$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"احبك$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"احبك$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.5
     animation_ttl = range(70)
-    event = await edit_or_reply(event, "loveu")
+    event = await edit_or_reply(event, "⇆")
     animation_chars = [
         "😀",
         "👩‍🎨",
@@ -182,19 +184,19 @@ async def _(event):
         "🤯",
         "💔",
         "❤",
-        "I Love You❤",
+        "احبك 😭💕",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 35])
 
 
-@bot.on(admin_cmd(pattern=r"plane$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"plane$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"طائره$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"طائره$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "Wait for plane...")
+    event = await edit_or_reply(event, "انتظر الطائره")
     await event.edit("✈-------------")
     await event.edit("-✈------------")
     await event.edit("--✈-----------")
@@ -212,14 +214,14 @@ async def _(event):
     await asyncio.sleep(3)
 
 
-@bot.on(admin_cmd(pattern=r"police$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"police$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"شرطه$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"شرطه$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.3
     animation_ttl = range(12)
-    event = await edit_or_reply(event, "Police")
+    event = await edit_or_reply(event, "⇆")
     animation_chars = [
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
         "🔵🔵🔵⬜⬜⬜🔴🔴🔴\n🔵🔵🔵⬜⬜⬜🔴🔴🔴\n🔵🔵🔵⬜⬜⬜🔴🔴🔴",
@@ -273,14 +275,14 @@ async def _(event):
         await event.edit(animation_chars[i % 19])
 
 
-@bot.on(admin_cmd(pattern=r"solarsystem$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"solarsystem$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"النضام الشمسي$", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"النضام الشمسي$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.1
     animation_ttl = range(80)
-    event = await edit_or_reply(event, "solarsystem")
+    event = await edit_or_reply(event, "⇆")
     animation_chars = [
         "`◼️◼️◼️◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️🌎◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️◼️◼️◼️`",
         "`◼️◼️◼️◼️◼️\n🌕◼️◼️◼️◼️\n◼️◼️🌎◼️◼️\n◼️◼️◼️◼️☀\n◼️◼️◼️◼️◼️`",
