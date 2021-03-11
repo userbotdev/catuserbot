@@ -55,7 +55,7 @@ if Config.PRIVATE_GROUP_ID is not None:
                 reason = "Not mentioned"
         if not pmpermit_sql.is_approved(user.id):
             if user.id in PM_WARNS:
-                del PM_WARNS[user.id] 
+                del PM_WARNS[user.id]
             if user.id in PREV_REPLY_MESSAGE:
                 await PREV_REPLY_MESSAGE[user.id].delete()
                 del PREV_REPLY_MESSAGE[user.id]
@@ -93,7 +93,7 @@ if Config.PRIVATE_GROUP_ID is not None:
             if reason == "all":
                 return
             if not user:
-                return 
+                return
         if user.id in PM_START:
             PM_START.remove(user.id)
         if pmpermit_sql.is_approved(user.id):
@@ -116,7 +116,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return 
+                return
         if user.id in PM_START:
             PM_START.remove(user.id)
         await event.edit(
@@ -131,7 +131,7 @@ if Config.PRIVATE_GROUP_ID is not None:
         else:
             user, reason = await get_user_from_event(event)
             if not user:
-                return 
+                return
         await event.client(functions.contacts.UnblockRequest(user.id))
         await event.edit(
             f"** ⪼ أنت غير محظور الآن. يمكنك مراسلتي من الآن ..** [{user.first_name}](tg://user?id={user.id})"
