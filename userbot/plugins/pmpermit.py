@@ -55,7 +55,7 @@ if Config.PRIVATE_GROUP_ID is not None:
                 reason = "Not mentioned"
         if not pmpermit_sql.is_approved(user.id):
             if user.id in PM_WARNS:
-                del PM_WARNS[user.id
+                del PM_WARNS[user.id] 
             if user.id in PREV_REPLY_MESSAGE:
                 await PREV_REPLY_MESSAGE[user.id].delete()
                 del PREV_REPLY_MESSAGE[user.id]
