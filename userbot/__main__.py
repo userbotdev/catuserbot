@@ -42,10 +42,10 @@ for name in files:
         if shortname.replace(".py", "") not in Config.NO_LOAD:
             load_module(shortname.replace(".py", ""))
 
-LOGS.info("Yay your userbot is officially working.!!!")
+LOGS.info("⫷ بوت اكسس يعمل بنجاح ⫸")
 LOGS.info(
-    "Congratulation, now type .alive to see message if bot is live\
-    \nIf you need assistance, head to https://t.me/catuserbot_support"
+    "⫷ مبروك عزيزي اكتب الان .ايدي لترى ما اذا كان البوت يعمل ⫸\
+    \n ⫷ إذا كنت بحاجة إلى مساعدة ، فتوجه إلى مطورس السورس https://t.me/rruuurr ⫸"
 )
 
 
@@ -54,8 +54,8 @@ async def startupmessage():
         if Config.PRIVATE_GROUP_BOT_API_ID:
             await bot.send_message(
                 Config.PRIVATE_GROUP_BOT_API_ID,
-                "**Congratulation, now type .alive to see message if bot is live\
-        \nIf you need assistance, **head to https://t.me/catuserbot_support",
+                "𓆰 𝑺𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑼𝑷𝑫𝑨𝑻𝑬 𝑴𝑺𝑮 ⤵︎\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n**⪼ مبروك عزيزي اكتب الان .ايدي لترى ما اذا كان بوت اكسس يعمل**\
+        \n ⪼ إذا كنت بحاجة إلى مساعدة راسل مطوري\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n 𓆰 𝙎𝙊𝙐𝙍𝘾𝞝 𝙄𝘾𝙎𝙎 - [𝘿𝙀𝙑](t.me/rruuurr)  𓆪",
                 link_preview=False,
             )
     except Exception as e:
