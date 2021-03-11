@@ -1,3 +1,4 @@
+# edit by: @rruuurr for icss
 import asyncio
 from collections import deque
 
@@ -6,14 +7,14 @@ from . import ALIVE_NAME
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 
-@bot.on(admin_cmd(pattern="stupid$"))
-@bot.on(sudo_cmd(pattern="stupid$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="غبي$"))
+@bot.on(sudo_cmd(pattern="غبي$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 1
     animation_ttl = range(14)
-    event = await edit_or_reply(event, "brain")
+    event = await edit_or_reply(event, "⇆")
     animation_chars = [
         "YOᑌᖇ ᗷᖇᗩIᑎ ➡️ 🧠\n\n🧠         <(^_^ <)🗑",
         "YOᑌᖇ ᗷᖇᗩIᑎ ➡️ 🧠\n\n🧠       <(^_^ <)  🗑",
@@ -35,12 +36,12 @@ async def _(event):
         await event.edit(animation_chars[i % 14])
 
 
-@bot.on(admin_cmd(pattern=f"bombs$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"bombs$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"القنابل$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"القنابل$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "bombs")
+    event = await edit_or_reply(event, "⇆")
     await event.edit("▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n")
     await asyncio.sleep(0.5)
     await event.edit("💣💣💣💣 \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n▪️▪️▪️▪️ \n")
@@ -63,8 +64,8 @@ async def _(event):
     await asyncio.sleep(2)
 
 
-@bot.on(admin_cmd(pattern=r"call$"))
-@bot.on(sudo_cmd(pattern=r"call$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"اتصل$"))
+@bot.on(sudo_cmd(pattern=r"اتصل$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -96,8 +97,8 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
-@bot.on(admin_cmd(pattern=f"kill$", outgoing=True))
-@bot.on(sudo_cmd(pattern=f"kill$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=f"قتل$", outgoing=True))
+@bot.on(sudo_cmd(pattern=f"قتل$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -123,14 +124,14 @@ async def _(event):
         await event.edit(animation_chars[i % 12])
 
 
-@bot.on(admin_cmd(pattern="wtf$"))
-@bot.on(sudo_cmd(pattern="wtf$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="شنو$"))
+@bot.on(sudo_cmd(pattern="شنو$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     animation_interval = 0.8
     animation_ttl = range(5)
-    event = await edit_or_reply(event, "wtf")
+    event = await edit_or_reply(event, "⇆")
     animation_chars = [
         "What",
         "What The",
@@ -198,12 +199,12 @@ async def _(event):
         await event.edit(animation_chars[i % 15])
 
 
-@bot.on(admin_cmd(pattern=r"candy$"))
-@bot.on(sudo_cmd(pattern=r"candy$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"حلويات$"))
+@bot.on(sudo_cmd(pattern=r"حلويات$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    event = await edit_or_reply(event, "candy")
+    event = await edit_or_reply(event, "⇆")
     deq = deque(list("🍦🍧🍩🍪🎂🍰🧁🍫🍬🍭"))
     for _ in range(999):
         await asyncio.sleep(0.4)
