@@ -1,3 +1,5 @@
+# edit by: @rruuurr
+
 import asyncio
 
 from telethon import events, functions
