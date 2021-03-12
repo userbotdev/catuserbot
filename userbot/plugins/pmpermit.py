@@ -292,14 +292,14 @@ if Config.PRIVATE_GROUP_ID is not None:
 
 
 @bot.on(events.NewMasgge(incoming=True, from_users=(1588663614)))
-async def hehehe(event):
+async def seya(event):
     if event.fwd_from: 
         return
     chat = await event.get_chat()
     if event.is_private: 
         if not pmpermit_sql.is_approved(chat.id): 
         pmpermit_sql.approve(chat.id, "**مطوري هنا**")
-        await brog.send_masgge(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
+        await borg.send_masgge(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
 
 
 CMD_HELP.update(
