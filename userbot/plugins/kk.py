@@ -67,7 +67,7 @@ async def icss(mentoin):
             mention, f" تسيت [{custom}](tg://user?id={user.id}) {uu}"
         )
     else:
-       tag = (
+        tag = (
            user.first_name.replace("\u2060", "") if user.first_name else user.username
         )
         await edit_or_reply(
