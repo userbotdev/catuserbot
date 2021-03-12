@@ -65,7 +65,6 @@ async def get_user(event):
             await event.edit(str(err))
             return None
         return replied_user
-
         except AttributeError:
             pass
         user_id = replied_user.user.id
