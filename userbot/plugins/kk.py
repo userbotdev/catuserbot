@@ -39,9 +39,6 @@ async def icss(ics):
 
 import random
 
-from telethon.tl.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
-
 hbk = ["100%" "90%" "80%" "70%" "60%" "50%" "40%" "30%" "20%" "10%" "0%"]
 
 
