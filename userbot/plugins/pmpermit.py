@@ -297,7 +297,7 @@ async def hehehe(event):
         return
     chat = await event.get_chat()
     if event.is_private: 
-        if not pmpermit_sql.is_apprve(chat.id): 
+        if not pmpermit_sql.is_approved(chat.id): 
         pmpermit_sql.approve(chat.id, "**مطوري هنا**")
         await brog.send_masgge(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
 
