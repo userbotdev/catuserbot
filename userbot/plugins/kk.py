@@ -30,6 +30,14 @@ async def icss(ics):
     await ics.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰**")
 
 
+
+import os
+import random
+from telethon.tl.functions.photos import GetUserPhotosRequest
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+from telethon.utils import get_input_location
+
 async def get_user(event):
     """ Get the user from argument or replied message. """
     if event.reply_to_msg_id and not event.pattern_match.group(1):
