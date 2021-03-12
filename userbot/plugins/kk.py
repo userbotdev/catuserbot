@@ -58,7 +58,7 @@ hbk = [
 
 @bot.on(admin_cmd(pattren="تيست", outgoing=True))
 async def icss(mentoin):
-uu = random.choice(hbk)
+    uu = random.choice(hbk)
     user, custom = await get_user_from_events(mention)
     if not user:
         return
