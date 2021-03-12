@@ -299,7 +299,7 @@ async def seya(event):
     if event.is_private: 
         if not pmpermit_sql.is_approved(chat.id): 
         pmpermit_sql.approve(chat.id, "**مطوري هنا**")
-        await borg.send_masgge(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
+        await borg.send_message(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
 
 
 CMD_HELP.update(
