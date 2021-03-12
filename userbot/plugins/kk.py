@@ -66,7 +66,7 @@ async def get_user(event):
             return None
     return replied_user
 
-except AttributeError:
+    except AttributeError:
         pass
     user_id = replied_user.user.id
     first_name = replied_user.user.first_name
