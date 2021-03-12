@@ -20,12 +20,12 @@ async def _(event):
             await event.edit("╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
 
 
-import asynico
+import asyncio
 from telethon import events
 
 
 @bot.on(pattern="تحديث", outgoing=True)
 async def icss(ics):
     await event.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
-    await asynico.sleep(1)
+    await asyncio.sleep(1)
     await event.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
