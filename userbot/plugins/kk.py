@@ -41,6 +41,6 @@ import random
 ahk = ["100%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", "0%"]
 
 @bot.on(admin_cmd(pattern="تت", outgoing=True))
-async def icss(ics)
+async def icss(ics):
     uu = random.choice(ahk)
     return await ics.edit(f"{uu}")  
