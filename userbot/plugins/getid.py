@@ -1,8 +1,10 @@
+# getid code for icss edit by @rruuurr & @EEEEE1K
+
 from telethon.utils import pack_bot_file_id
 
 
-@bot.on(admin_cmd(pattern="(get_id|id)( (.*)|$)"))
-@bot.on(sudo_cmd(pattern="(get_id|id)( (.*)|$)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="(الايدي|id)( (.*)|$)"))
+@bot.on(sudo_cmd(pattern="(الايدي|id)( (.*)|$)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -15,17 +17,17 @@ async def _(event):
         try:
             if p.first_name:
                 return await edit_or_reply(
-                    event, f"The id of the user `{input_str}` is `{p.id}`"
+                    event, f"⪼ ايدي المستخدم `{input_str}` هو `{p.id}` 𓆰."
                 )
-        except Exception:
+        except:
             try:
                 if p.title:
                     return await edit_or_reply(
-                        event, f"The id of the chat/channel `{p.title}` is `{p.id}`"
+                        event, f"⪼ ايدي الدردشة / القناة `{p.title}` هو `{p.id}` 𓆰."
                     )
-            except Exception as e:
-                LOGS.info(str(e))
-        await edit_or_reply(event, "`Either give input as username or reply to user`")
+            except:
+                pass
+        await edit_or_reply(event, "⪼ **أدخل إما اسم مستخدم أو الرد على المستخدم**")
     elif event.reply_to_msg_id:
         await event.get_input_chat()
         r_msg = await event.get_reply_message()
@@ -33,15 +35,15 @@ async def _(event):
             bot_api_file_id = pack_bot_file_id(r_msg.media)
             await edit_or_reply(
                 event,
-                f"**Current Chat ID : **`{str(event.chat_id)}`\n**From User ID: **`{str(r_msg.sender_id)}`\n**Media File ID: **`{bot_api_file_id}`",
+                f"⪼ **ايدي الدردشه : **`{str(event.chat_id)}` 𓆰.\n**⪼ ايدي المستخدم : **`{str(r_msg.sender_id)}` 𓆰.\n⪼ **ايدي الميديا : **`{bot_api_file_id}` 𓆰.",
             )
         else:
             await edit_or_reply(
                 event,
-                f"**Current Chat ID : **`{str(event.chat_id)}`\n**From User ID: **`{str(r_msg.sender_id)}`",
+                f"⪼ **ايدي الدردشه : **`{str(event.chat_id)}` 𓆰.\n⪼ **ايدي المستخدم: **`{str(r_msg.sender_id)}` 𓆰.",
             )
     else:
-        await edit_or_reply(event, f"**Current Chat ID : **`{str(event.chat_id)}`")
+        await edit_or_reply(event, f"⪼ **ايدي الدردشه : **`{str(event.chat_id)}` 𓆰.")
 
 
 CMD_HELP.update(
