@@ -48,9 +48,7 @@ async def _(event):
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_or_reply(
-            event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**"
-        )
+        await edit_or_reply(event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**")
         return
     result = await event.client(
         functions.channels.GetParticipantRequest(
@@ -95,9 +93,7 @@ async def _(event):
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_or_reply(
-            event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**"
-        )
+        await edit_or_reply(event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**")
         return
     result = await event.client(
         functions.channels.GetParticipantRequest(
