@@ -45,7 +45,7 @@ TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
 hbk = ["100%" "90%" "80%" "70%" "60%" "50%" "40%" "30%" "20%" "10%" "0%"]
 
 
-@bot.on(admin_cmd(pattren="تيست", outgoing=True))
+@bot.on(admin_cmd(pattren="تيست(?: |$)(.*)"))"
 async def icss(mentoin):
     uu = random.choice(hbk)
     user, custom = await get_user_from_events(mention)
@@ -59,7 +59,7 @@ async def icss(mentoin):
         tag = (
             user.first_name.replace("\u2060", "") if user.first_name else user.username
         )
-        return await edit_or_reply(mention, f"تيست [{tag}](tg://user?id={user.id})")
+        return await edit_or_reply(mention, f"تيست [{tag}](tg://user?id={user.id}) {uu}")
 
 
 async def get_user_from_event(event):
