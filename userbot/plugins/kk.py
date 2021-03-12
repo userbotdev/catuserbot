@@ -64,19 +64,19 @@ async def get_user(event):
         except (TypeError, ValueError) as err:
             await event.edit(str(err))
             return None
-    return replied_user
+        return replied_user
 
-    except AttributeError:
-        pass
-    user_id = replied_user.user.id
-    first_name = replied_user.user.first_name
-    last_name = replied_user.user.last_name
-    try:
-        dc_id, location = get_input_location(replied_user.profile_photo)
-    except:
-        pass
-    replied_user.common_chats_count
-    username = replied_user.user.username
+        except AttributeError:
+            pass
+        user_id = replied_user.user.id
+        first_name = replied_user.user.first_name
+        last_name = replied_user.user.last_name
+        try:
+            dc_id, location = get_input_location(replied_user.profile_photo)
+        except:
+            pass
+        replied_user.common_chats_count
+        username = replied_user.user.username
 
 hbk = ["100%" "90%" "80%" "70%" "60%" "50%" "40%" "30%" "20%" "10%" "0%"]
 
