@@ -160,7 +160,7 @@ if Config.PRIVATE_GROUP_ID is not None:
     async def disapprove_p_m(event):
         if event.fwd_from:
             return
-        result = "⪼ حسنا، الجميع مرفوض اللن 𓆰"
+        result = "⪼ حسنا، الجميع مرفوض الان 𓆰"
         pmpermit_sql.disapprove_all()
         await edit_delete(event, result, parse_mode=parse_pre, time=10)
 
@@ -297,7 +297,7 @@ async def hehehe(event):
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
             pmpermit_sql.approve(chat.id, "**مطوري هنا**")
-            await borg.send_message(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
+            await borg.send_message(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰**")
 
 
 CMD_HELP.update(
