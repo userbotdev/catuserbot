@@ -25,7 +25,7 @@ import asyncio
 from telethon import events
 
 
-@bot.on(pattern="تحديث", outgoing=True)
+@bot.on(admin_cmd(pattern="تحديث", outgoing=True))
 async def icss(ics):
     await event.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
     await asyncio.sleep(1)
