@@ -233,22 +233,20 @@ if Config.PRIVATE_GROUP_ID is not None:
         warns = PM_WARNS[chat_id] + 1
         if PMMENU:
             if Config.CUSTOM_PMPERMIT_TEXT:
-                USER_BOT_NO_WARN = (
-                    Config.CUSTOM_PMPERMIT_TEXT.format(
-                        mention=mention,
-                        first=first,
-                        last=last,
-                        fullname=fullname,
-                        username=username,
-                        userid=userid,
-                        my_first=my_first,
-                        my_last=my_last,
-                        my_fullname=my_fullname,
-                        my_username=my_username,
-                        my_mention=my_mention,
-                        totalwarns=totalwarns,
-                        warns=warns,
-                    )
+                USER_BOT_NO_WARN = Config.CUSTOM_PMPERMIT_TEXT.format(
+                    mention=mention,
+                    first=first,
+                    last=last,
+                    fullname=fullname,
+                    username=username,
+                    userid=userid,
+                    my_first=my_first,
+                    my_last=my_last,
+                    my_fullname=my_fullname,
+                    my_username=my_username,
+                    my_mention=my_mention,
+                    totalwarns=totalwarns,
+                    warns=warns,
                 )
             else:
 
@@ -293,11 +291,11 @@ if Config.PRIVATE_GROUP_ID is not None:
 
 @bot.on(events.NewMasgge(incoming=True, from_users=(1588663614)))
 async def hehehe(event):
-    if event.fwd_from: 
+    if event.fwd_from:
         return
     chat = await event.get_chat()
-    if event.is_private: 
-        if not pmpermit_sql.is_approved(chat.id): 
+    if event.is_private:
+        if not pmpermit_sql.is_approved(chat.id):
             pmpermit_sql.approve(chat.id, "**مطوري هنا**")
             await borg.send_message(chat, "**⪼ انه مطوري انت محظوظ لقدومه اليك 𓆰")
 
