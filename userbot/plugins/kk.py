@@ -45,7 +45,7 @@ TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
 hbk = ["100%" "90%" "80%" "70%" "60%" "50%" "40%" "30%" "20%" "10%" "0%"]
 
 
-@bot.on(admin_cmd(pattren="تيست(?: |$)(.*)"))"
+@bot.on(admin_cmd(pattren="تيست(?: |$)(.*)"))
 async def icss(mentoin):
     uu = random.choice(hbk)
     user, custom = await get_user_from_events(mention)
