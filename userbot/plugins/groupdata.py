@@ -238,8 +238,8 @@ async def _(event):
         await et.edit("⪼ {} **↩︎ {} غير محظور**".format(event.chat_id, p))
 
 
-@bot.on(admin_cmd(pattern="الاحصائيات ?(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="الاحصائيات ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="اكسباير ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="اكسباير ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
