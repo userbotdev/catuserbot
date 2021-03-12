@@ -36,20 +36,20 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@bot.on(admin_cmd(pattern="kickall ?(.*)"))
-@bot.on(sudo_cmd(pattern="kickall ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="تفليش بلطرد ?(.*)"))
+@bot.on(sudo_cmd(pattern="تفليش بلطرد ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_group:
-        await edit_or_reply(event, "`I don't think this is a group.`")
+        await edit_or_reply(event, "**⪼ هل هذا كروب ! 𓆰**")
         return
     chat = await event.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
         await edit_or_reply(
-            event, "`You are not admin of this chat to perform this action`"
+            event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**"
         )
         return
     result = await event.client(
@@ -59,9 +59,9 @@ async def _(event):
     )
     if not result.participant.admin_rights.ban_users:
         return await edit_or_reply(
-            event, "`It seems like you dont have ban users permission in this group.`"
+            event, "⪼ يبدو أنك لم تقم بحظر إذن المستخدمين في هذه المجموعة 𓆰"
         )
-    catevent = await edit_or_reply(event, "`Kicking...`")
+    catevent = await edit_or_reply(event, "**╮ ❐ جـاري طرد الكل 𓅫╰**")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -79,24 +79,24 @@ async def _(event):
             LOGS.info(str(e))
             await sleep(0.5)
     await catevent.edit(
-        f"`Sucessfully i have completed kickall process with {success} members kicked out of {total} members`"
+        f"**⪼ لقد أكملت بنجاح عملية طرد** {success} **عضو من** {total} **عضو 𓆰**"
     )
 
 
-@bot.on(admin_cmd(pattern="banall ?(.*)"))
-@bot.on(sudo_cmd(pattern="banall ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="تفليش بلحظر ?(.*)"))
+@bot.on(sudo_cmd(pattern="تفليش بلحظر ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_group:
-        await edit_or_reply(event, "`I don't think this is a group.`")
+        await edit_or_reply(event, "**⪼ هل هذا كروب ! 𓆰**")
         return
     chat = await event.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
         await edit_or_reply(
-            event, "`You are not admin of this chat to perform this action`"
+            event, "**⪼ تحتاج الى ان تكون مشرف في المجموعه 𓆰**"
         )
         return
     result = await event.client(
@@ -106,9 +106,9 @@ async def _(event):
     )
     if not result:
         return await edit_or_reply(
-            event, "`It seems like you dont have ban users permission in this group.`"
+            event, "⪼ يبدو أنك لا تملك اصلاحية حظر المستخدمين في هذه المجموعة 𓆰"
         )
-    catevent = await edit_or_reply(event, "`banning...`")
+    catevent = await edit_or_reply(event, "**╮ ❐ جـاري حظر الكل 𓅫╰**")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -128,12 +128,12 @@ async def _(event):
             LOGS.info(str(e))
             await sleep(0.5)
     await catevent.edit(
-        f"`Sucessfully i have completed banall process with {success} members banned out of {total} members`"
+        f"**⪼ لقد أكملت بنجاح عملية حظر** {success} **عضو من** {total} **عضو 𓆰**"
     )
 
 
-@bot.on(admin_cmd(pattern="unbanall ?(.*)"))
-@bot.on(sudo_cmd(pattern="unbanall ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="رفع الحظر ?(.*)"))
+@bot.on(sudo_cmd(pattern="رفع الحظر ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -143,7 +143,7 @@ async def _(event):
     else:
         if event.is_private:
             return False
-        et = await edit_or_reply(event, "Searching Participant Lists.")
+        et = await edit_or_reply(event, "**↫ البحث في قوائم المشاركين ⇲**")
         p = 0
         async for i in event.client.iter_participants(
             event.chat_id, filter=ChannelParticipantsKicked, aggressive=True
@@ -157,7 +157,7 @@ async def _(event):
                 await et.edit(str(ex))
             else:
                 p += 1
-        await et.edit("{}: {} unbanned".format(event.chat_id, p))
+        await et.edit("⪼ {} **↫** {} **رفع الحظر عنهم**".format(event.chat_id, p))
 
 
 @bot.on(admin_cmd(pattern="ikuck ?(.*)", outgoing=True))
@@ -171,7 +171,7 @@ async def _(event):
     if input_str:
         chat = await event.get_chat()
         if not chat.admin_rights and not chat.creator:
-            await edit_or_reply(event, "`You aren't an admin here!`")
+            await edit_or_reply(event, "**⪼ يجب ان تكون مشرف اولاً 𓆰**")
             return False
     p = 0
     b = 0
@@ -185,7 +185,7 @@ async def _(event):
     o = 0
     q = 0
     r = 0
-    et = await edit_or_reply(event, "Searching Participant Lists.")
+    et = await edit_or_reply(event, "**↫ البحث في قوائم المشاركين ⇲**")
     async for i in event.client.iter_participants(event.chat_id):
         p += 1
         #
@@ -199,7 +199,7 @@ async def _(event):
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastMonth):
@@ -209,7 +209,7 @@ async def _(event):
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastWeek):
@@ -219,7 +219,7 @@ async def _(event):
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusOffline):
@@ -227,7 +227,7 @@ async def _(event):
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
                 else:
@@ -237,7 +237,7 @@ async def _(event):
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
                 else:
@@ -249,7 +249,7 @@ async def _(event):
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
         if i.bot:
@@ -257,7 +257,7 @@ async def _(event):
             if "b" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
                     break
                 else:
@@ -269,34 +269,38 @@ async def _(event):
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**↫ احتاج الى صلاحيات المشرف اولا ⇲**")
                     e.append(str(e))
         elif i.status is None:
             n += 1
     if input_str:
-        required_string = """Kicked {} / {} users
-Deleted Accounts: {}
-UserStatusEmpty: {}
-UserStatusLastMonth: {}
-UserStatusLastWeek: {}
-UserStatusOffline: {}
-UserStatusOnline: {}
-UserStatusRecently: {}
-Bots: {}
-None: {}"""
+        required_string = """𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑮𝑹𝑼𝑶𝑷 𝑫𝑨𝑻𝑨 𓆪
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻
+**⌔∮ المطرودين {} / {} المستخدمين 
+**⌔∮ الحسابات المحذوفه :** {}
+**⌔∮ اخر ظهور منذ زمن طويل :** {}
+**⌔∮ اخر ظهور منذ شهر :** {}
+**⌔∮ اخر ظهور منذ اسبوع :** {}
+**⌔∮ متصل :** {}
+**⌔∮ غير متصل :** {}
+**⌔∮ اخر ظهور منذ قليل :** {}
+**⌔∮ البوتات :** {}
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻"""
         await et.edit(required_string.format(c, p, d, y, m, w, o, q, r, b, n))
         await sleep(5)
     await et.edit(
-        """Total: {} users
-Deleted Accounts: {}
-UserStatusEmpty: {}
-UserStatusLastMonth: {}
-UserStatusLastWeek: {}
-UserStatusOffline: {}
-UserStatusOnline: {}
-UserStatusRecently: {}
-Bots: {}
-None: {}""".format(
+        """𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑮𝑹𝑼𝑶𝑷 𝑫𝑨𝑻𝑨 𓆪
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻
+**⌔∮ العدد : ** {} مستخدم 
+**⌔∮ الحسابات المحذوفه :** {}
+**⌔∮ اخر ظهور منذ زمن طويل :** {}
+**⌔∮ اخر ظهور منذ شهر :** {}
+**⌔∮ اخر ظهور منذ اسبوع :** {}
+**⌔∮ متصل :** {}
+**⌔∮ غير متصل :** {}
+**⌔∮ اخر ظهور منذ قليل :** {}
+**⌔∮ البوتات :** {}
+𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻""".format(
             p, d, y, m, w, o, q, r, b, n
         )
     )
