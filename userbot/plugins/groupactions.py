@@ -36,8 +36,8 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@bot.on(admin_cmd(pattern="تفليش بلطرد ?(.*)"))
-@bot.on(sudo_cmd(pattern="تفليش بلطرد ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="تفليش بلطرد?(.*)"))
+@bot.on(sudo_cmd(pattern="تفليش بلطرد?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -81,8 +81,8 @@ async def _(event):
     )
 
 
-@bot.on(admin_cmd(pattern="تفليش بلحظر ?(.*)"))
-@bot.on(sudo_cmd(pattern="تفليش بلحظر ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="تفليش بلحظر?(.*)"))
+@bot.on(sudo_cmd(pattern="تفليش بلحظر?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
