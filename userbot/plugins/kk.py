@@ -24,7 +24,7 @@ import asynico
 from telethon import events
 
 @bot.on(pattern="تحديث", outgoing=True)
-async def icss(event) 
+async def icss(event):
  await event.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
  await async.sleep(1)
  await event.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
