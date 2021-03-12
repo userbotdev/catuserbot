@@ -39,8 +39,6 @@ async def icss(ics):
 
 import random
 
-TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
-
 
 hbk = ["100%" "90%" "80%" "70%" "60%" "50%" "40%" "30%" "20%" "10%" "0%"]
 
