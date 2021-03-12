@@ -65,7 +65,7 @@ import random
 from telethon.tl.types import MessageEntityMentionName
 
 ppp = [
-    "100%",
+    "100% 🔱💕.",
     "90%",
     "80%",
     "70%",
@@ -79,8 +79,8 @@ ppp = [
 ]
 
 
-@bot.on(admin_cmd(pattern="هع(?: |$)(.*)"))
-@bot.on(sudo_cmd(pattern="هع(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="نسبه الرجوله(?: |$)(.*)"))
+@bot.on(sudo_cmd(pattern="نسبه الرجوله(?: |$)(.*)", allow_sudo=True))
 async def permalink(mention):
     ioi = random.choice(ppp)
     user, custom = await get_user_from_event(mention)
@@ -89,7 +89,7 @@ async def permalink(mention):
     if custom:
         await edit_or_reply(
             mention,
-            f"⌔∮ المستخدم [{custom}](tg://user?id={user.id}) {ioi} ",
+            f"⌔∮ نسبه الرجوله لـ [{custom}](tg://user?id={user.id}) هيه {ioi} ",
         )
     else:
         tag = (
@@ -97,7 +97,7 @@ async def permalink(mention):
         )
         await edit_or_reply(
             mention,
-            f"⌔∮ المستخدم [{tag}](tg://user?id={user.id}) {ioi} ",
+            f"⌔∮ نسبه الرجوله لـ [{tag}](tg://user?id={user.id}) هيه {ioi} ",
         )
 
 
