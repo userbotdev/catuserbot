@@ -61,6 +61,7 @@ async def icss(ics):
 
 
 import random
+
 from telethon.tl.types import MessageEntityMentionName
 
 ppp = [
@@ -81,7 +82,7 @@ ppp = [
 @bot.on(admin_cmd(pattern="هع(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="هع(?: |$)(.*)", allow_sudo=True))
 async def permalink(mention):
-    ioi = random.choice(ppp) 
+    ioi = random.choice(ppp)
     user, custom = await get_user_from_event(mention)
     if not user:
         return
