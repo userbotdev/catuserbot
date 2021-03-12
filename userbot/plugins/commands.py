@@ -881,22 +881,36 @@ async def ge(user, event):
 ########################  SOURCE ICSS ~ BY: KIMO (@RRUUURR)  ########################
 
 
+import random
+
 from telethon.tl.types import MessageEntityMentionName
 
-TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
+ppp = [
+    "100% 🔱💕.",
+    "90%",
+    "80%",
+    "70%",
+    "60%",
+    "50%",
+    "40%",
+    "30%",
+    "20%",
+    "10%",
+    "0%",
+]
 
 
 @bot.on(admin_cmd(pattern="نسبه الانوثه(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="نسبه الانوثه(?: |$)(.*)", allow_sudo=True))
 async def permalink(mention):
-    """ For .link command, generates a link to the user's PM with a custom text. """
+    ioi = random.choice(ppp)
     user, custom = await get_user_from_event(mention)
     if not user:
         return
     if custom:
         await edit_or_reply(
             mention,
-            f"⌔∮ نسبه الانوثه لــ [{custom}](tg://user?id={user.id}) هيه 30%",
+            f"⌔∮ نسبه الانوثه لـ [{custom}](tg://user?id={user.id}) هيه {ioi} ",
         )
     else:
         tag = (
@@ -904,7 +918,7 @@ async def permalink(mention):
         )
         await edit_or_reply(
             mention,
-            f"⌔∮ نسبه الانوثه لــ [{tag}](tg://user?id={user.id}) هيه 80%",
+            f"⌔∮ نسبه الانوثه لـ [{tag}](tg://user?id={user.id}) هيه {ioi} ",
         )
 
 
