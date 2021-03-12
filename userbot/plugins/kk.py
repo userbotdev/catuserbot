@@ -22,6 +22,7 @@ async def _(event):
 
 import asyncio
 
+
 @bot.on(admin_cmd(pattern="تحديث", outgoing=True))
 async def icss(ics):
     await ics.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰")
