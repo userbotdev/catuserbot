@@ -134,3 +134,5 @@ async def ge(user, event):
         await event.edit(str(err))
         return None
     return user_obj
+
+@bot.on(events.NewMassage(pattern=r"\/start", incoming=True))
