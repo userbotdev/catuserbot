@@ -58,7 +58,7 @@ for name in files:
             LOGS.info(f"⫷ لايمكن تحميل - {shortname} بسبب {e} ⫸")
 
 LOGS.info("⫷ بوت اكسس يعمل بنجاح الان ⫸")
-LOGS.info("⫷ اذا كنت بحاجه الى مساعده فتوجه الى مطور اكسس - @rruuurr ⫸")
+LOGS.info("\n⫷ اذا كنت بحاجه الى مساعده فتوجه الى مطور اكسس - @rruuurr ⫸")
 
 
 async def startupmessage():
