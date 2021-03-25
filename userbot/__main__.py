@@ -1,4 +1,4 @@
-سimport glob
+import glob
 import os
 import sys
 from pathlib import Path
