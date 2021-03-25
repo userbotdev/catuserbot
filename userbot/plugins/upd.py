@@ -28,11 +28,7 @@ RESTARTING_APP = "re-starting heroku application"
 # -- Constants End -- #
 
 
-@borg.on(
-    admin_cmd(
-       "تحديث ?(.*)", outgoing=True
-    )
-)
+@borg.on(admin_cmd("تحديث ?(.*)", outgoing=True))
 async def updater(message):
     folder = os.path.abspath("/app")
     try:
@@ -100,7 +96,7 @@ async def updater(message):
 async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(RESTARTING_APP)
     await message.edit(
-       "**⌔∮ تم تحديث بوت اكسس انتظر 5 دقايق ثم اكتب `.بنك` لتاكد من ان البوت يعمل**"
+        "**⌔∮ تم تحديث بوت اكسس انتظر 5 دقايق ثم اكتب `.بنك` لتاكد من ان البوت يعمل**"
     )
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
