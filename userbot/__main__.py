@@ -1,4 +1,4 @@
-import glob
+سimport glob
 import os
 import sys
 from pathlib import Path
@@ -27,15 +27,15 @@ else:
     bot.tgbot = None
     try: 
         if Config.TG_BOT_USERNAME is not None:
-            LOGS.info("Initiating Inline Bot")
+            LOGS.info("⫷ جاري تنزيل انلاين البوت ⫸")
             # ForTheGreatrerGood of beautification
             bot.tgbot = TelegramClient(
                 "TG_BOT_TOKEN", api_id=Config.APP_ID, api_hash=Config.API_HASH
             ).start(bot_token=Config.TG_BOT_TOKEN)
-            LOGS.info("Initialisation finished with no errors")
-            LOGS.info("Starting Userbot")
+            LOGS.info("⫷ تم تنزيل انلاين بدون اخطاء ⫸")
+            LOGS.info("⫷ جاري بدء بوت اكسس ⫸")
             bot.loop.run_until_complete(add_bot(Config.TG_BOT_USERNAME))
-            LOGS.info("Startup Completed")
+            LOGS.info("⫷ تم بدء بوت اكسس ⫸")
         else:
             bot.start()
      except Exception as e:
@@ -52,9 +52,9 @@ for name in files:
             if shortname.replace(".py", "") not in Config.NO_LOAD:
                 load_module(shortname.replace(".py", ""))
             else: 
-                os.remov(Path(f"userbot/plugins/{shortname}.py"))
+                os.remove(Path(f"userbot/plugins/{shortname}.py"))
         except Exception as e:
-           os.remov(Path(f"userbot/plugins/{shortname}.py))
+           os.remove(Path(f"userbot/plugins/{shortname}.py))
            LOGS.info(f"⫷ لا يمكن تحميل {shortname} بسبب الخطأ {e} ⫸")
 
 LOGS.info("⫷ بوت اكسس يعمل بنجاح ⫸")
@@ -84,3 +84,4 @@ if len(sys.argv) not in (1, 3, 4):
 else:
     bot.tgbot = None
     bot.run_until_disconnected()
+
