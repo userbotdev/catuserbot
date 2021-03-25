@@ -53,7 +53,7 @@ for name in files:
                 load_module(shortname.replace(".py", ""))
             else: 
                 os.remov(Path(f"userbot/plugins/{shortname}.py"))
-       except Exception as e:
+        except Exception as e:
            os.remov(Path(f"userbot/plugins/{shortname}.py))
            LOGS.info(f"⫷ لا يمكن تحميل {shortname} بسبب الخطأ {e} ⫸")
 
