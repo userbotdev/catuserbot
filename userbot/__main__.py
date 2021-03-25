@@ -58,9 +58,7 @@ for name in files:
             LOGS.info(f"⫷ لايمكن تحميل - {shortname} بسبب {e} ⫸")
 
 LOGS.info("⫷ بوت اكسس يعمل بنجاح الان ⫸")
-LOGS.info(
-   " ⫷ اذا كنت بحاجه الى مساعده فتوجه الى مطور اكسس - @rruuurr ⫸"
-)
+LOGS.info("⫷ اذا كنت بحاجه الى مساعده فتوجه الى مطور اكسس - @rruuurr ⫸")
 
 
 async def startupmessage():
@@ -68,12 +66,12 @@ async def startupmessage():
         if Config.PRIVATE_GROUP_BOT_API_ID != 0:
             await bot.send_message(
                 Config.PRIVATE_GROUP_BOT_API_ID,
-                "𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑼𝑷𝑫𝑨𝑻𝑬 𝑴𝑺𝑮 ⤵︎\n"
-                "𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-                "**⪼ مبروك عزيزي اكتب الان `.ايدي` لترى ما اذا كان بوت اكسس يعمل**\n"
-                "⪼ إذا كنت بحاجة إلى مساعدة راسل مطوري\n"
-                "𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n" 
-                "𓆰 𝙎𝙊𝙐𝙍𝘾𝞝 𝙄𝘾𝙎𝙎 - [𝘿𝙀𝙑](t.me/rruuurr) 𓆪"
+                f"𓆰 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺  - 𝑼𝑷𝑫𝑨𝑻𝑬 𝑴𝑺𝑮 ⤵︎\n"
+                f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
+                f"**⪼ مبروك عزيزي اكتب الان `.ايدي` لترى ما اذا كان بوت اكسس يعمل**\n"
+                f"⪼ إذا كنت بحاجة إلى مساعدة راسل مطوري\n"
+                f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n" 
+                f"𓆰 𝙎𝙊𝙐𝙍𝘾𝞝 𝙄𝘾𝙎𝙎 - [𝘿𝙀𝙑](t.me/rruuurr) 𓆪"
                 link_preview=False,
             )
     except Exception as e:
