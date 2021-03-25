@@ -20,16 +20,6 @@ async def _(event):
             await event.edit("╭━━━╮\n┃╭━━╯\n┃╰━━╮\n┃╭━━╯\n┃┃\n╰╯")
 
 
-import asyncio
-
-
-@bot.on(admin_cmd(pattern="تحديث", outgoing=True))
-async def icss(ics):
-    await ics.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰**")
-    await asyncio.sleep(1)
-    await ics.edit("**⪼ هذا الامر غير موجود اذا اردت معرفت السبب راسل المطور 𓆰**")
-
-
 import random
 
 ahk = [
