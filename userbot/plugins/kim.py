@@ -11,10 +11,11 @@ T = (
     "𓆩 𝙎𝙊𝙐𝙍𝘾𝞝 𝙞𝘾𝙎𝙎 - [𝘿𝙀𝙑](t.me/rruuurr) 𓆪"
 )
 
+
 @bot.on(admin_cmd(pattern="م22"))
 async def xo(k):
-   return await edit_or_reply(k, T)
-   
+    return await edit_or_reply(k, T)
+
 
 @bot.on(admin_cmd(pattern="اكس او$"))
 async def gamez(event):
