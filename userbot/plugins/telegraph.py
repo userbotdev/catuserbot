@@ -57,8 +57,8 @@ async def _(event):
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
                 await catevent.edit(
-                    "**الرابط : **[اضغط هنا](https://telegra.ph{})\
-                    \n**الوقت : **`{} ثانيه.` \n **تم التحميل بواسطه :** {}".format(
+                    "**⌔∮ الرابط : **[اضغط هنا](https://telegra.ph{})\
+                    \n**⌔∮ الوقت : **`{} ثانيه.` \n**⌔∮ تم التحميل بواسطه :** {}".format(
                         media_urls[0], (ms + ms_two), (mention)
                     ),
                     link_preview=True,
