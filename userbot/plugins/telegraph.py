@@ -6,7 +6,7 @@ from datetime import datetime
 from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
 
-from . import BOTLOG_CHATID
+from . import BOTLOG_CHATID, mention
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
@@ -58,8 +58,8 @@ async def _(event):
                 os.remove(downloaded_file_name)
                 await catevent.edit(
                     "**الرابط : **[اضغط هنا](https://telegra.ph{})\
-                    \n**الوقت : **`{} ثانيه.`".format(
-                        media_urls[0], (ms + ms_two)
+                    \n**الوقت : **`{} ثانيه.` \n **تم التحميل بواسطه :** {}".format(
+                        media_urls[0], (ms + ms_two), mention
                     ),
                     link_preview=True,
                 )
