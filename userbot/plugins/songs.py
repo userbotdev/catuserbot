@@ -87,7 +87,7 @@ async def _(event):
         event.chat_id,
         song_file,
         force_document=False,
-        caption=f"**⌔∮ لاغنيه :-** {query}\n**⌔∮ تم التحميل بواسطة :-** {mention}**",
+        caption=f"**⌔∮ الاغنيه :** {query}\n**⌔∮ تم التحميل بواسطة :** {mention}",
         thumb=catthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
