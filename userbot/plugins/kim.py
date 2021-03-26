@@ -2,16 +2,7 @@
 #    (c) @rruuurr
 
 
-from userbot import CMD_HELP
-from userbot.Config import Config
-
-
-@bot.on(
-    admin_cmd(
-       pattern="اكس او$"
-    )
-)
-
+@bot.on(admin_cmd(pattern="اكس او$"))
 async def gamez(event):
     if event.fwd_from:
         return
