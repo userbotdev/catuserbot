@@ -15,7 +15,7 @@ async def wspr(kimo):
     
 # Wespr - همسه
 @bot.on(admin_cmd(outgoing=True, pattern="هسمه$"))
-async def tmgif(lon):
+async def kimo(lon):
     if lon.fwd_from:
         return
     lonid = await reply_id(lon)
