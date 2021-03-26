@@ -59,7 +59,7 @@ async def _(event):
                 await catevent.edit(
                     "**الرابط : **[اضغط هنا](https://telegra.ph{})\
                     \n**الوقت : **`{} ثانيه.` \n **تم التحميل بواسطه :** {}".format(
-                        media_urls[0], (ms + ms_two), mention
+                        media_urls[0], (ms + ms_two), (mention)
                     ),
                     link_preview=True,
                 )
