@@ -220,8 +220,8 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                 reply_pop_up_alert = "{} is useless".format(plugin_name)
             else:
                 reply_pop_up_alert = help_string
-            reply_pop_up_alert += (
-                "استخدم .unload {} لحذف هذه الاضافه ©rruuurr".format(plugin_name)
+            reply_pop_up_alert += "استخدم .unload {} لحذف هذه الاضافه ©rruuurr".format(
+                plugin_name
             )
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
