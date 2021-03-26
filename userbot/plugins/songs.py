@@ -7,6 +7,7 @@ import asyncio
 import base64
 import os
 from pathlib import Path
+from . inport mention
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
@@ -87,7 +88,7 @@ async def _(event):
         event.chat_id,
         song_file,
         force_document=False,
-        caption=query,
+        caption=f"**⌔∮ لاغنيه :-** {query}\n**⌔∮ تم التحميل بواسطة :-** {mention}**",
         thumb=catthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
