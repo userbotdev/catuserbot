@@ -42,7 +42,7 @@ async def cmd_list(event):
                 .get("key")
             )
             url = f"https://nekobin.com/{key}"
-            reply_text = f"**All commands of the catuserbot can be seen [here]({url})**"
+            reply_text = f"**All commands of the Icssuserbot can be seen [here]({url})**"
             await event.edit(reply_text)
             return
         await event.edit(string.format(count=catcount, plugincount=plugincount))
@@ -64,17 +64,17 @@ async def cmd_list(event):
             await event.delete()
     else:
         if HELPTYPE is True:
-            help_string = f"Userbot Helper. Provided by {ALIVE_NAME} to reveal all the plugins\
-                          \nCheck `.help plugin name` for commands, in case popup doesn't appear.\
-                          \nCheck `.info plugin name` for usage of thoose plugins and commands"
+            help_string = f"اكسس بوت . للمستخدم  {ALIVE_NAME} لاضهار جميع الاضافات\
+                          \nاكتب `.help plugin name` لاجل اضهار الاوامر.\
+                          \nاكتب `.info plugin name` لاضهار كيفية استخدام الاوامر"
             tgbotusername = Config.TG_BOT_USERNAME
             results = await event.client.inline_query(tgbotusername, help_string)
             await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
             await event.delete()
         else:
-            string = "<b>Please specify which plugin do you want help for !!\
-                \nNumber of plugins : </b><code>{count}</code>\
-                \n<b>Usage:</b> <code>.help plugin name</code> \n\n"
+            string = "<b>⌔∮ اختر الاضافه او الملف الذي تريد المساعده او كيفيه استخدامه  !!\
+                \nرقم الاضافه : </b><code>{count}</code>\
+                \n<b>الاستخدام :</b> <code>.help plugin name</code> \n\n"
             catcount = 0
             for i in sorted(CMD_LIST):
                 string += "◆ " + f"<code>{str(i)}</code>"
@@ -89,12 +89,12 @@ async def info(event):
         return
     input_str = event.pattern_match.group(1)
     if input_str == "text":
-        string = "Total {count} commands found in {plugincount} sudo plugins of catuserbot\n\n"
+        string = "⌔∮ عدد {count} الاوامر الموجوده في {plugincount} السودو اضافات في اكسس بوت\n\n"
         catcount = 0
         plugincount = 0
         for i in sorted(SUDO_LIST):
             plugincount += 1
-            string += f"{plugincount}) Commands found in Plugin " + i + " are \n"
+            string += f"⌔∮ {plugincount}) الاوامر الموجوده " + i + " are \n"
             for iter_list in SUDO_LIST[i]:
                 string += "    " + str(iter_list)
                 string += "\n"
@@ -111,7 +111,7 @@ async def info(event):
                 .get("key")
             )
             url = f"https://nekobin.com/{key}"
-            reply_text = f"All commands of the catuserbot are [here]({url})"
+            reply_text = f"⌔∮ جميع اوامر اكسس بوت [تجدها هنا]({url})"
             await event.reply(reply_text, link_preview=False)
             return
         await event.reply(
@@ -120,7 +120,7 @@ async def info(event):
         return
     if input_str:
         if input_str in SUDO_LIST:
-            string = "<b>{count} Commands found in plugin {input_str}:</b>\n\n"
+            string = "<b>{count} الاوامر الموجوده في {input_str}:</b>\n\n"
             catcount = 0
             for i in SUDO_LIST[input_str]:
                 string += f"  •  <code>{i}</code>"
