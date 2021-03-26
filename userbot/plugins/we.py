@@ -16,7 +16,7 @@ async def wspr(kimo):
 
 
 # Wespr - همسه
-@bot.on(admin_cmd(outgoing=True, pattern="هسمه$"))
+@bot.on(admin_cmd(outgoing=True, pattern="همسه$"))
 async def kimo(lon):
     if lon.fwd_from:
         return
