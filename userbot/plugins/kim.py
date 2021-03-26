@@ -1,5 +1,5 @@
-#    IcssBot - UserBot
-#    (c) @rruuurr
+#     IcssBot - UserBot
+#     (c) @rruuurr
 
 
 @bot.on(admin_cmd(pattern="اكس او$"))
