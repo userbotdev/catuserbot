@@ -7,7 +7,7 @@ import asyncio
 import base64
 import os
 from pathlib import Path
-from . inport mention
+from . import mention
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
