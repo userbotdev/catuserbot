@@ -138,7 +138,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                 custom.Button.inline("اضهار الرساله 🔐", data=f"secret_{timestamp}")
             ]
             result = builder.article(
-                title="secret message",
+                title="✨ ارسال الهمسه ✨",
                 text=f"**⌔∮ هذه الهمسه الى {sandy} هو الوحيد الذي يستطيع رؤيتها.**",
                 buttons=buttons,
             )
