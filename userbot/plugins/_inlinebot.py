@@ -25,7 +25,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/sandy1709/catuserbot"),
+                    Button.url("Repo", "https://github.com/ANL0KE/catuserbot"),
                 )
             ]
             if CAT_IMG and CAT_IMG.endswith((".jpg", ".png")):
@@ -53,8 +53,8 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
-                "© Userbot Help",
-                text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
+                "© Icss Help",
+                text="{}\n**- عدد الاضافات :** {}".format(query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
             )
@@ -135,11 +135,11 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
             buttons = [
-                custom.Button.inline("show message 🔐", data=f"secret_{timestamp}")
+                custom.Button.inline("اضهار الرساله 🔐", data=f"secret_{timestamp}")
             ]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                text=f"⌔∮ هذه الهمسه الى {sandy}, هو الوحيد الذي يستطيع رؤيتها.",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -161,7 +161,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help"
+            reply_pop_up_alert = "عليك الحصول على بوت اكسس خاص بك من - @rruuurr. "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -221,7 +221,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += (
-                "Use .unload {} to remove this plugin ©catuserbot".format(plugin_name)
+                "استخدم .unload {} لحذف هذه الاضافه ©rruuurr".format(plugin_name)
             )
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
@@ -237,7 +237,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                         caption=plugin_name,
                     )
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "عليك الحصول على بوت اكسس خاص بك من - @rruuurr.  "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -245,7 +245,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             await event.edit("menu closed")
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "عليك الحصول على بوت اكسس خاص بك من - @rruuurr.  "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))
@@ -293,11 +293,11 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ] + [
             (
                 custom.Button.inline(
-                    "⌫", data="{}_prev({})".format(prefix, modulo_page)
+                    "⫷ السابق", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("Close", data="close"),
+                custom.Button.inline("║ اغلاق ║", data="close"),
                 custom.Button.inline(
-                    "⌦", data="{}_next({})".format(prefix, modulo_page)
+                    "التالي ⫸", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
         ]
