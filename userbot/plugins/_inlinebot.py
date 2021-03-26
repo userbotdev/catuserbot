@@ -21,7 +21,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         query = event.text
         hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
-        if query.startswith("**Catuserbot") and event.query.user_id == bot.uid:
+        if query.startswith("**Icss Bot") and event.query.user_id == bot.uid:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
@@ -139,7 +139,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             ]
             result = builder.article(
                 title="secret message",
-                text=f"⌔∮ هذه الهمسه الى {sandy}, هو الوحيد الذي يستطيع رؤيتها.",
+                text=f"**⌔∮ هذه الهمسه الى {sandy} هو الوحيد الذي يستطيع رؤيتها.**",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -178,7 +178,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            reply_pop_up_alert = "عليك الحصول على بوت اكسس خاص بك من - @rruuurr.  "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"secret_(.*)")))
