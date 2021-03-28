@@ -246,15 +246,6 @@ async def wish_check(event):
     await edit_or_reply(event, reslt)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="repo$"))
-@bot.on(sudo_cmd(pattern="repo$", allow_sudo=True))
-async def source(e):
-    await edit_or_reply(
-        e,
-        "- Click [here](https://github.com/ANL0KE/catuserbot) to open this lit af repo.",
-    )
-
-
 @bot.on(admin_cmd(pattern="lfy ?(.*)"))
 @bot.on(sudo_cmd(pattern="lfy ?(.*)", allow_sudo=True))
 async def _(event):
