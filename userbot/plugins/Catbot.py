@@ -1,16 +1,13 @@
 from telethon import Button
-from . import (
-    ALIVE_NAME,
-    TOSH, 
-    catversion,
-    mention,
-    K,
-    R,
-)
+
+from . import TOSH, K, R
+
+
 @bot.on(admin_cmd(pattern="repo$"))
 @bot.on(sudo_cmd(pattern="repo$", allow_sudo=True))
 async def icsrepo(icsp):
     await eor(icsp, R)
+
 
 CAT_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/499596b18292c0e43ac56.jpg"
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
