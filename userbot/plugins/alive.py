@@ -5,8 +5,6 @@ from telethon import version
 
 from . import (
     ALIVE_NAME,
-    TOSH,
-    K,
     StartTime,
     catversion,
     get_readable_time,
@@ -54,55 +52,6 @@ async def amireallyalive(alive):
             f"**{EMOJI} مدة التشغيل ↫** `{uptime}\n`"
             f"**{EMOJI} المستخدم ↫** {mention}\n",
         )
-
-
-if Config.TG_BOT_USERNAME is not None and tgbot is not None:
-
-    @tgbot.on(events.InlineQuery)
-    async def inline_handler(event):
-        builder = event.builder
-        result = None
-        query = event.text
-        await bot.get_me()
-        if query.startswith("البوت") and event.query.user_id == bot.uid:
-            buttons = [
-                [
-                    Button.url("الرابط 🔗", K),
-                ]
-            ]
-            if CAT_IMG and CAT_IMG.endswith((".jpg", ".png", "gif", "mp4")):
-                result = builder.photo(
-                    CAT_IMG, text=TOSH, buttons=buttons, link_preview=False
-                )
-            elif CAT_IMG:
-                result = builder.document(
-                    CAT_IMG,
-                    title="Arabic - Cat",
-                    text=TOSH,
-                    buttons=buttons,
-                    link_preview=False,
-                )
-            else:
-                result = builder.article(
-                    title="Arabic - Cat",
-                    text=TOSH,
-                    buttons=buttons,
-                    link_preview=False,
-                )
-            await event.answer([result] if result else None)
-
-
-@bot.on(admin_cmd(outgoing=True, pattern="البوت"))
-async def repo(event):
-    if event.fwd_from:
-        return
-    KIM = Config.TG_BOT_USERNAME
-    if event.reply_to_msg_id:
-        await event.get_reply_message()
-    response = await bot.inline_query(KIM, "البوت")
-    await response[0].click(event.chat_id)
-    await event.delete()
-
 
 def check_data_base_heal_th():
     # https://stackoverflow.com/a/41961968
