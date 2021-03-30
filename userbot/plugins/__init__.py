@@ -26,6 +26,25 @@ BOT_USERNAME = Config.TG_BOT_USERNAME
 mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
 hmention = f"<a href = tg://user?id={USERID}>{DEFAULTUSER}</a>"
 
+# Alive Bot 
+TOSH = (
+       f"**⌔∮ بوت كات يعمل بنجاح 🖤❕**\n"
+       f"**   - اصدار التليثون :** `{version.__version__}\n`"
+       f"**   - اصدار كات :** `{catversion}`\n"
+       f"**   - البوت المستخدم :** `{BOT_USERNAME}`\n"
+       f"**   - اصدار البايثون :** `{python_version()}\n`"
+       f"**   - المستخدم :** {mention}\n"
+)
+
+# Repo 
+R = (
+    "⌔∮ 𝘼𝙍𝘼𝘽𝙄𝘾 𝘾𝘼𝙏 - 𝙍𝙀𝙋𝙊 𓆪 \n"
+    "𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
+    "- 𝘼𝙍𝘼𝘽𝙄𝘾 𝘾𝘼𝙏 𝘿𝙀𝙑⁦⁦ ⪼ [𝘾𝙇𝙄𝘾𝙆 𝙃𝙀𝙍𝙀](t.me/rruuurr) ⩫ \n"
+    "- 𝘼𝙍𝘼𝘽𝙄𝘾 𝘾𝘼𝙏 𝙍𝙀𝙋𝙊⁦ ⪼ [𝘾𝙇𝙄𝘾𝙆 𝙃𝙀𝙍𝙀](https://github.com/ANL0KE/ICSS-USERBOT) ⩫"
+)
+K = "https://github.com/ANL0KE/catuserbot"
+
 
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
