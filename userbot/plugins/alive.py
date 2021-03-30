@@ -3,14 +3,7 @@ from platform import python_version
 
 from telethon import version
 
-from . import (
-    ALIVE_NAME,
-    StartTime,
-    catversion,
-    get_readable_time,
-    mention,
-    reply_id,
-)
+from . import ALIVE_NAME, StartTime, catversion, get_readable_time, mention, reply_id
 
 DEFAULTUSER = ALIVE_NAME or "ICSS"
 CAT_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/499596b18292c0e43ac56.jpg"
@@ -52,6 +45,7 @@ async def amireallyalive(alive):
             f"**{EMOJI} مدة التشغيل ↫** `{uptime}\n`"
             f"**{EMOJI} المستخدم ↫** {mention}\n",
         )
+
 
 def check_data_base_heal_th():
     # https://stackoverflow.com/a/41961968
