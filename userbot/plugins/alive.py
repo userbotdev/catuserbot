@@ -3,11 +3,11 @@ from platform import python_version
 
 from telethon import version
 
-from . import ALIVE_NAME, StartTime, catversion, get_readable_time, mention, reply_id
+from . import TOSH, K, ALIVE_NAME, StartTime, catversion, get_readable_time, mention, reply_id
 
 DEFAULTUSER = ALIVE_NAME or "ICSS"
 CAT_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/499596b18292c0e43ac56.jpg"
-CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "𓆩 𝑾𝑬𝑳𝑪𝑶𝑴𝑬 𝑻𝑶 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺 𓆪"
+CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "𓆩 𝑾𝑬𝑳𝑪𝑶𝑴𝑬 𝑻𝑶 𝑨𝑹𝑨𝑩𝑰𝑪 𝑪𝑨𝑻 𓆪"
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or "  - ❝ ⌊ "
 
 
@@ -24,7 +24,7 @@ async def amireallyalive(alive):
         cat_caption += f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𝐢𝐜𝐬𝐬ⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
         cat_caption += f"**{EMOJI} قاعدة البيانات ↫** `{check_sgnirts}`\n"
         cat_caption += f"**{EMOJI} اصدار التليثون  ↫** `{version.__version__}\n`"
-        cat_caption += f"**{EMOJI} اصدار اڪسس ↫** `{catversion}`\n"
+        cat_caption += f"**{EMOJI} اصدار كات ↫** `{catversion}`\n"
         cat_caption += f"**{EMOJI} اصدار البايثون ↫** `{python_version()}\n`"
         #        cat_caption += f"**{EMOJI} مدة التشغيل ↫** `{uptime}\n`"
         cat_caption += f"**{EMOJI} المستخدم ↫** {mention}\n"
@@ -40,28 +40,60 @@ async def amireallyalive(alive):
             f"**{CUSTOM_ALIVE_TEXT}**\n\n"
             f"**{EMOJI} قاعدة البيانات ↫**  `{check_sgnirts}`\n"
             f"**{EMOJI} اصدار التليثون  ↫** `{version.__version__}\n`"
-            f"**{EMOJI} اصدار اڪسس ↫** `{catversion}`\n"
+            f"**{EMOJI} اصدار كات ↫** `{catversion}`\n"
             f"**{EMOJI} اصدار البايثون  ↫** `{python_version()}\n`"
             f"**{EMOJI} مدة التشغيل ↫** `{uptime}\n`"
             f"**{EMOJI} المستخدم ↫** {mention}\n",
         )
 
+if Config.TG_BOT_USERNAME is not None and tgbot is not None:
+    @tgbot.on(events.InlineQuery)
+    async def inline_handler(event):
+        builder = event.builder
+        result = None
+        query = event.text
+        me = await bot.get_me()
+        if query.startswith("البوت") and event.query.user_id == bot.uid:
+            buttons = [
+                [
+                    Button.url("الرابط 🔗", K),
+                ]
+            ]
+            if CAT_IMG and CAT_IMG.endswith((".jpg", ".png", "gif", "mp4")):
+                result = builder.photo(
+                    CAT_IMG,
+                    text=TOSH,
+                    buttons=buttons,
+                    link_preview=False
+                )
+            elif CAT_IMG:
+                result = builder.document(
+                    CAT_IMG,
+                    title="Arabic - Cat",
+                    text=TOSH,
+                    buttons=buttons,
+                    link_preview=False,
+                )
+            else:
+                result = builder.article(
+                    title="Arabic - Cat",
+                    text=TOSH,
+                    buttons=buttons,
+                    link_preview=False,
+                )
+            await event.answer([result] if result else None)
 
-@bot.on(admin_cmd(outgoing=True, pattern="البوت$"))
-@bot.on(sudo_cmd(pattern="البوت$", allow_sudo=True))
-async def amireallyalive(alive):
-    if alive.fwd_from:
+@bot.on(admin_cmd(outgoing=True, pattern="البوت"))
+async def repo(event):
+    if event.fwd_from:
         return
-    tgbotusername = Config.TG_BOT_USERNAME
-    reply_to_id = await reply_id(alive)
-    cat_caption = f"𓆩 𝑾𝑬𝑳𝑪𝑶𝑴𝑬 𝑻𝑶 𝑺𝑶𝑼𝑹𝑪𝑬 𝑰𝑪𝑺𝑺 𓆪\n"
-    cat_caption += f"**  - اصدار التليثون ↫** `{version.__version__}\n`"
-    cat_caption += f"**  - اصدار اكسس ↫** `{catversion}`\n"
-    cat_caption += f"**  - اصدار البايثون ↫** `{python_version()}\n`"
-    cat_caption += f"**  - المستخدم ↫** {mention}\n"
-    results = await bot.inline_query(tgbotusername, cat_caption)  # pylint:disable=E0602
-    await results[0].click(alive.chat_id, reply_to=reply_to_id, hide_via=True)
-    await alive.delete()
+    KIM = Config.TG_BOT_USERNAME
+    if event.reply_to_msg_id:
+        await event.get_reply_message()
+    response = await bot.inline_query(KIM, "البوت")
+    await response[0].click(event.chat_id)
+    await event.delete()
+
 
 
 def check_data_base_heal_th():
