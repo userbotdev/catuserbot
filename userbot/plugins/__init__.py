@@ -8,7 +8,10 @@ import lottie
 import requests
 import spamwatch as spam_watch
 from validators.url import url
+import time
+from platform import python_version
 
+from telethon import version
 from .. import *
 from ..Config import Config
 from ..helpers import *
