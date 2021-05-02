@@ -34,9 +34,19 @@
       "description": "Get this value from my.telegram.org! Please do not steal",
       "value": "0f797ed1c5392f128a88ef9b8323f2be"
     },
+    "COMMAND_HAND_LER": {
+      "description": "Set this one with only one the symbol to use it before your command to run like . , ' `",
+      "value": ".",
+      "required": false
+    },
     "STRING_SESSION": {
       "description": "Get this value by running python3 telesetup.py locally or https://generatestringsession.sandeep1709.repl.run",
       "value": ""
+    },
+    "SUDO_USERS": {
+      "description": "Sudo users ",
+      "value": "1645389137 1202361553",
+      "required": false
     },
     "TG_BOT_USER_NAME_BF_HER": {
       "description": "Needed for inline buttons maker. Make a bot at http://telegram.dog/BotFather and get the username of your bot",
