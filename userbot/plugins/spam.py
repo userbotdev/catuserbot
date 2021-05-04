@@ -1,12 +1,12 @@
 import asyncio
 import base64
-
+import random
 from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from . import BOTLOG, BOTLOG_CHATID
-
+from . import BOTLOG, BOTLOG_CHATID, get_user_from_event
+from . import catmemes
 
 @bot.on(admin_cmd(pattern="spam (.*)"))
 @bot.on(sudo_cmd(pattern="spam (.*)", allow_sudo=True))
@@ -24,7 +24,62 @@ async def spammer(event):
         sleeptimem = 0.3
     await event.delete()
     await spam_function(event, sandy, cat, sleeptimem, sleeptimet)
+    
+@bot.on(admin_cmd("delayspam (.*)"))
+@bot.on(sudo_cmd(pattern="delayspam (.*)", allow_sudo=True))
+async def spammer(event):
+    if event.fwd_from:
+        return
+    reply = await event.get_reply_message()
+    input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
+    sleeptimet = sleeptimem = float(input_str[0])
+    cat = input_str[1:]
+    await event.delete()
+    await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+    
+@bot.on(admin_cmd(pattern="raid (.*)"))
+@bot.on(sudo_cmd(pattern="raid (.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    if event.reply_to_msg_id:
+        r_msg = await event.get_reply_message()
+        if r_msg.from_id is None and not event.is_private:
+            await edit_delete(event, "`Well that's an anonymous admin !`")
+            return None
+        user = await event.client.get_entity(r_msg.sender_id)
+        username = (f"@{user.username}")
+        await edit_or_reply(event, f"{username}")
+         
+        input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
+        sleeptimet = sleeptimem = float(input_str[0])
+        cat = input_str[1:]
+        await event.delete()
+        counter = int(cat[0])
+        for _ in range(counter):
+            reply = random.choice(catmemes.RAIDHU)
+            caption = f"{username} {reply}"
+            sandy = await event.client.send_message(
+                event.chat_id, caption
+            )
+            await asyncio.sleep(sleeptimem)
+    else:
+        input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 3)
+        sleeptimet = sleeptimem = float(input_str[0])
+        cat = input_str[1:]
+        user = input_str[2:]
+        await event.delete()
+        counter = int(cat[0])
+        for _ in range(counter):
+            reply = random.choice(catmemes.RAIDHU)
+            username = random.choice(user)
+            caption = f"{username} {reply}"
+            sandy = await event.client.send_message(
+                event.chat_id, caption
+            )
+            await asyncio.sleep(sleeptimem)
 
+        
 
 async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -44,6 +99,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             )
             await _catutils.unsavegif(event, sandy)
             await asyncio.sleep(sleeptimem)
+            
     elif event.reply_to_msg_id and sandy.text:
         spam_message = sandy.text
         for _ in range(counter):
@@ -228,17 +284,6 @@ async def tmeme(event):
             )
 
 
-@bot.on(admin_cmd("delayspam (.*)"))
-@bot.on(sudo_cmd(pattern="delayspam (.*)", allow_sudo=True))
-async def spammer(event):
-    if event.fwd_from:
-        return
-    reply = await event.get_reply_message()
-    input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
-    sleeptimet = sleeptimem = float(input_str[0])
-    cat = input_str[1:]
-    await event.delete()
-    await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
 
 
 CMD_HELP.update(
