@@ -67,7 +67,7 @@ async def cmd_list(event):
             help_string = f"Userbot Helper. Provided by {ALIVE_NAME} to reveal all the plugins\
                           \nCheck `.help plugin name` for commands, in case popup doesn't appear.\
                           \nCheck `.info plugin name` for usage of thoose plugins and commands"
-            tgbotusername = Config.TG_BOT_USER_NAME_BF_HER
+            tgbotusername = Config.TG_BOT_USERNAME
             results = await event.client.inline_query(tgbotusername, help_string)
             await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
             await event.delete()
@@ -220,16 +220,12 @@ async def _(event):
 CMD_HELP.update(
     {
         "help": """**Plugin : **`help`
-
 •  **Syntax : **`.help/.help plugin_name`
 •  **Function : **__If you just type .help then shows you help menu, if plugin name is given then shows you only commands in thst plugin and if you use `.help text` then shows you all commands in your userbot__
-
 •  **Syntax : **`.info/.info plugin_name`
 •  **Function : **__To get details/information/usage of that plugin__
-
 •  **Syntax : **`.dc`
 •  **Function : **__Shows your dc id and dc ids list__
-
 •  **Syntax : **`.setinline (true|false)`
 •  **Function : **__Sets help menu either in inline or text format__"""
     }
